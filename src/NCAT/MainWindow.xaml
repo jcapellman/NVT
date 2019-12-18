@@ -1,0 +1,56 @@
+﻿<mah:MetroWindow x:Class="NCAT.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:NCAT.ViewModels"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        mc:Ignorable="d"
+        ShowIconOnTitleBar="False"
+        WindowStartupLocation="CenterScreen"
+        Title="NCAT" ResizeMode="NoResize" Height="450" Width="800">
+    <Window.DataContext>
+        <viewModels:MainViewModel />
+    </Window.DataContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" Style="{StaticResource MetroLabel}" Content="Active TCP Connections" />
+
+        <ListView Grid.Row="1" ItemsSource="{Binding Connections}">
+            <ListView.View>
+                <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Network Connection">
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=DetectedTime}" Header="Detection" Width="150"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=IPAddress}" Header="IP Address" Width="150"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Port}" Header="Port" Width="100" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Country}" Header="Country" Width="150" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=ISP}" Header="ISP" Width="250" />
+                </GridView>
+            </ListView.View>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150" />
+                            <ColumnDefinition Width="150" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="150" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0" Content="{Binding DetectedTime}" />
+                        <Label Grid.Column="1" Content="{Binding IPAddress}" />
+                        <Label Grid.Column="2" Content="{Binding Port}" />
+                        <Label Grid.Column="3" Content="{Binding Country}" />
+                        <Label Grid.Column="4" Content="{Binding ISP}" />
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</mah:MetroWindow>
