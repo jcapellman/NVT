@@ -5,10 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:NCAT.ViewModels"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:wpf="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
         mc:Ignorable="d"
         ShowIconOnTitleBar="False"
         WindowStartupLocation="CenterScreen"
-        Title="NCAT" ResizeMode="NoResize" Height="450" Width="800">
+        Title="NCAT" ResizeMode="NoResize" Height="720" Width="1280">
     <Window.DataContext>
         <viewModels:MainViewModel />
     </Window.DataContext>
@@ -16,19 +17,22 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="300" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Label Grid.Row="0" Style="{StaticResource MetroLabel}" Content="Active TCP Connections" />
 
-        <ListView Grid.Row="1" ItemsSource="{Binding Connections}">
+        <wpf:Map Grid.Row="1" x:Name="bmMap" CredentialsProvider="AofM3Qx9ySMc6cYJ5iSz0UI_gs1vgdzRgWSmGqIvYvf3W36A2cJQvrAK99AMhOYM" ZoomLevel="12" />
+
+        <ListView Grid.Row="2" ItemsSource="{Binding Connections}">
             <ListView.View>
                 <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Network Connection">
                     <GridViewColumn DisplayMemberBinding="{Binding Path=DetectedTime}" Header="Detection" Width="150"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=IPAddress}" Header="IP Address" Width="150"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Port}" Header="Port" Width="100" />
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Country}" Header="Country" Width="150" />
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=ISP}" Header="ISP" Width="250" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=ISP}" Header="ISP" Width="240" />
                 </GridView>
             </ListView.View>
 

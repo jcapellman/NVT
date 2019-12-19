@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Net.NetworkInformation;
-using System.Text.Json;
 using System.Threading.Tasks;
 
-using NCAT.lib.JSONObjects;
+using LiteDB;
+
 using NCAT.lib.Objects;
 
 namespace NCAT.lib
@@ -14,16 +15,38 @@ namespace NCAT.lib
     {
         private static readonly HttpClient HttpClient = new HttpClient();
 
-        private const string UNKNOWN = "<UNKNOWN>";
+        public const string UNKNOWN = "<UNKNOWN>";
 
-        private static async Task<(string ISP, string Country)> GetReverseLookupAsync(string ipAddress)
+        private const string LOCALHOST = "127.0.0.1";
+
+        private static NetworkConnectionItem CheckDB(string ipAddress)
         {
-            if (ipAddress != "127.0.0.1")
+            using (var db = new LiteDatabase(@"ips.db"))
+            {
+                var items = db.GetCollection<NetworkConnectionItem>();
+
+                return items.FindOne(a => a.IPAddress == ipAddress);
+            }
+        }
+
+        private static void AddToDB(NetworkConnectionItem item)
+        {
+            using (var db = new LiteDatabase(@"ips.db"))
+            {
+                var items = db.GetCollection<NetworkConnectionItem>();
+
+                items.Insert(item);
+            }
+        }
+
+        private static async Task<NetworkConnectionItem> GetReverseLookupAsync(NetworkConnectionItem item)
+        {
+            if (item.IPAddress != LOCALHOST)
             {
                 try
                 {
                     var response =
-                        await HttpClient.GetAsync(new Uri($"http://ip-api.com/csv/{ipAddress}?fields=country,isp"));
+                        await HttpClient.GetAsync(new Uri($"http://ip-api.com/csv/{item.IPAddress}?fields=lat,lon,country,isp"));
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -33,10 +56,22 @@ namespace NCAT.lib
 
                         if (string.IsNullOrEmpty(csv))
                         {
-                            return (UNKNOWN, UNKNOWN);
+                            item.ISP = UNKNOWN;
+                            item.Country = UNKNOWN;
+
+                            return item;
                         }
 
-                        return (csv.Split(',')[1], csv.Split(',')[0]);
+                        var split = csv.Split(',');
+
+                        item.Latitude = Convert.ToDouble(split[1]);
+                        item.Longitude = Convert.ToDouble(split[2]);
+                        item.Country = split[0];
+                        item.ISP = split[3].Replace(@"""", string.Empty);
+
+                        AddToDB(item);
+
+                        return item;
                     }
                 }
                 catch (HttpRequestException hre)
@@ -45,10 +80,10 @@ namespace NCAT.lib
                 }
             }
 
-            return (UNKNOWN, UNKNOWN);
+            return item;
         }
 
-        public static async Task<List<NetworkConnectionItem>> GetConnections()
+        public static async Task<List<NetworkConnectionItem>> GetConnectionsAsync()
         {
             var properties = IPGlobalProperties.GetIPGlobalProperties();
 
@@ -56,16 +91,21 @@ namespace NCAT.lib
 
             var activeConnections = new List<NetworkConnectionItem>();
 
-            foreach (var connection in connections)
+            foreach (var connection in connections.Where(a => a.RemoteEndPoint.Address.ToString() != LOCALHOST))
             {
-                var item = new NetworkConnectionItem
-                {
-                    IPAddress = connection.RemoteEndPoint.Address.ToString(),
-                    Port = connection.RemoteEndPoint.Port,
-                    DetectedTime = DateTime.Now
-                };
+                var item = CheckDB(connection.RemoteEndPoint.Address.ToString());
 
-                (item.ISP, item.Country) = await GetReverseLookupAsync(item.IPAddress);
+                if (item == null)
+                {
+                    item = new NetworkConnectionItem
+                    {
+                        IPAddress = connection.RemoteEndPoint.Address.ToString(),
+                        Port = connection.RemoteEndPoint.Port,
+                        DetectedTime = DateTime.Now
+                    };
+
+                    item = await GetReverseLookupAsync(item);
+                }
 
                 activeConnections.Add(item);
             }
