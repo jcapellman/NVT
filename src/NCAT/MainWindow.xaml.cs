@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using MahApps.Metro.Controls;
+﻿using MahApps.Metro.Controls;
 
 using Microsoft.Maps.MapControl.WPF;
 
@@ -9,7 +8,7 @@ namespace NCAT
 {
     public partial class MainWindow : MetroWindow
     {
-        private MainViewModel viewModel => (MainViewModel) DataContext;
+        private MainViewModel ViewModel => (MainViewModel) DataContext;
 
         public MainWindow()
         {
@@ -17,12 +16,14 @@ namespace NCAT
 
             DataContext = new MainViewModel();
 
-            viewModel.OnNewConnections += ViewModel_OnNewConnections;    
+            ViewModel.OnNewConnections += ViewModel_OnNewConnections1; ;    
         }
 
-        private void ViewModel_OnNewConnections(object sender, System.Collections.Generic.List<lib.Objects.NetworkConnectionItem> e)
+        private void ViewModel_OnNewConnections1(object sender, System.EventArgs e)
         {
-            foreach (var item in e)
+            bmMap.Children.Clear();
+
+            foreach (var item in ViewModel.Connections)
             {
                 bmMap.Children.Add(new Pushpin
                 {
@@ -31,9 +32,10 @@ namespace NCAT
                 });
             }
 
-            LocationRect boundingBox = new LocationRect(viewModel.Locations);
-
+            var boundingBox = new LocationRect(ViewModel.Locations);
+            
             bmMap.SetView(boundingBox);
+            bmMap.ZoomLevel = 3;
         }
     }
 }

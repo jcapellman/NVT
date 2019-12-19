@@ -5,8 +5,6 @@ using System.Net.Http;
 using System.Net.NetworkInformation;
 using System.Threading.Tasks;
 
-using LiteDB;
-
 using NCAT.lib.Objects;
 
 namespace NCAT.lib
@@ -18,26 +16,6 @@ namespace NCAT.lib
         public const string UNKNOWN = "<UNKNOWN>";
 
         private const string LOCALHOST = "127.0.0.1";
-
-        private static NetworkConnectionItem CheckDB(string ipAddress)
-        {
-            using (var db = new LiteDatabase(@"ips.db"))
-            {
-                var items = db.GetCollection<NetworkConnectionItem>();
-
-                return items.FindOne(a => a.IPAddress == ipAddress);
-            }
-        }
-
-        private static void AddToDB(NetworkConnectionItem item)
-        {
-            using (var db = new LiteDatabase(@"ips.db"))
-            {
-                var items = db.GetCollection<NetworkConnectionItem>();
-
-                items.Insert(item);
-            }
-        }
 
         private static async Task<NetworkConnectionItem> GetReverseLookupAsync(NetworkConnectionItem item)
         {
@@ -69,14 +47,14 @@ namespace NCAT.lib
                         item.Country = split[0];
                         item.ISP = split[3].Replace(@"""", string.Empty);
 
-                        AddToDB(item);
+                        DB.AddToDB(item);
 
                         return item;
                     }
                 }
                 catch (HttpRequestException hre)
                 {
-                    var e = hre;
+                    // Log
                 }
             }
 
@@ -93,7 +71,7 @@ namespace NCAT.lib
 
             foreach (var connection in connections.Where(a => a.RemoteEndPoint.Address.ToString() != LOCALHOST))
             {
-                var item = CheckDB(connection.RemoteEndPoint.Address.ToString());
+                var item = DB.CheckDB(connection.RemoteEndPoint.Address.ToString());
 
                 if (item == null)
                 {
@@ -105,6 +83,10 @@ namespace NCAT.lib
                     };
 
                     item = await GetReverseLookupAsync(item);
+                }
+                else
+                {
+                    item.DetectedTime = DateTime.Now;
                 }
 
                 activeConnections.Add(item);

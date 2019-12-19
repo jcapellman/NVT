@@ -14,7 +14,7 @@ namespace NCAT.ViewModels
 {
     public class MainViewModel : INotifyPropertyChanged
     {
-        public event EventHandler<List<NetworkConnectionItem>> OnNewConnections;
+        public event EventHandler OnNewConnections;
 
         private ObservableCollection<NetworkConnectionItem> _connections;
 
@@ -30,27 +30,15 @@ namespace NCAT.ViewModels
             }
         }
 
-        private ObservableCollection<Location> _locations;
-
-        public ObservableCollection<Location> Locations
-        {
-            get => _locations;
-
-            set
-            {
-                _locations = value;
-
-                OnPropertyChanged();
-            }
-        }
+        public List<Location> Locations =>
+            Connections.Select(a => new Location(a.Latitude, a.Longitude)).ToList();
 
         private BackgroundWorker _bwConnections;
 
         public MainViewModel()
         {
             Connections = new ObservableCollection<NetworkConnectionItem>();
-            Locations = new ObservableCollection<Location>();
-
+            
             _bwConnections = new BackgroundWorker();
 
             _bwConnections.DoWork += _bwConnections_DoWork;
@@ -68,27 +56,21 @@ namespace NCAT.ViewModels
         {
             var newConnections = await TCPConnections.GetConnectionsAsync();
 
-            var newlyAddedConnections = new List<NetworkConnectionItem>();
+            for (var x = 0; x < Connections.Count; x++)
+            {
+                if (!newConnections.Any(a => a.IPAddress == Connections[x].IPAddress && a.Port == Connections[x].Port))
+                {
+                    Connections.RemoveAt(x);
+                }
+            }
 
             foreach (var connection in newConnections.Where(connection =>
                 !Connections.Any(a => a.IPAddress == connection.IPAddress && a.Port == connection.Port)))
             {
                 Connections.Insert(0, connection);
-
-                if (connection.ISP == TCPConnections.UNKNOWN)
-                {
-                    continue;
-                }
-
-                Locations.Add(new Location(connection.Latitude, connection.Longitude));
-
-                newlyAddedConnections.Add(connection);
             }
 
-            if (newlyAddedConnections.Any())
-            {
-                OnNewConnections?.Invoke(null, newlyAddedConnections);
-            }
+            OnNewConnections?.Invoke(null, null);
 
             _bwConnections.RunWorkerAsync();
         }
