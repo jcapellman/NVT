@@ -33,7 +33,8 @@
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Port}" Header="Port" Width="100" />
                     <GridViewColumn DisplayMemberBinding="{Binding Path=City}" Header="City" Width="150" />
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Country}" Header="Country" Width="150" />
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=ISP}" Header="ISP" Width="240" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=ISP}" Header="ISP" Width="150" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=ProcessFileName}" Header="Process File Name" Width="350" />
                 </GridView>
             </ListView.View>
 
@@ -46,6 +47,7 @@
                             <ColumnDefinition Width="100" />
                             <ColumnDefinition Width="150" />
                             <ColumnDefinition Width="150" />
+                            <ColumnDefinition Width="150" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
@@ -55,6 +57,7 @@
                         <Label Grid.Column="3" Content="{Binding City}" />
                         <Label Grid.Column="4" Content="{Binding Country}" />
                         <Label Grid.Column="5" Content="{Binding ISP}" />
+                        <Label Grid.Column="6" Content="{Binding ProcessFileName}" />
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

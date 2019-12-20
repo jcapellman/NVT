@@ -21,5 +21,9 @@ namespace NCAT.lib.Objects
         public double Longitude { get; set; }
 
         public DateTime DetectedTime { get; set; }
+
+        public string ProcessName { get; set; }
+
+        public string ProcessFileName { get; set; }
     }
 }

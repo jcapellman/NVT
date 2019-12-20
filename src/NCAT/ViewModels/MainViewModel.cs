@@ -49,7 +49,7 @@ namespace NCAT.ViewModels
 
         private void _bwConnections_DoWork(object sender, DoWorkEventArgs e)
         {
-            System.Threading.Thread.Sleep(1000);
+            System.Threading.Thread.Sleep(3000);
         }
 
         private async void _bwConnections_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

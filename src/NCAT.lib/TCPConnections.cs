@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
-using System.Net.NetworkInformation;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 using NCAT.lib.JSONObjects;
@@ -16,6 +17,8 @@ namespace NCAT.lib
         private static readonly HttpClient HttpClient = new HttpClient();
 
         public const string UNKNOWN = "<UNKNOWN>";
+
+        private static string[] EMPTY_HOST = { "0.0.0.0:0", "[::]:0" };
 
         private const string LOCALHOST = "127.0.0.1";
 
@@ -64,33 +67,103 @@ namespace NCAT.lib
 
         public static async Task<List<NetworkConnectionItem>> GetConnectionsAsync()
         {
-            var properties = IPGlobalProperties.GetIPGlobalProperties();
-
-            var connections = properties.GetActiveTcpConnections();
+            var processes = Process.GetProcesses();
 
             var activeConnections = new List<NetworkConnectionItem>();
 
-            foreach (var connection in connections.Where(a => a.RemoteEndPoint.Address.ToString() != LOCALHOST))
+            var pStartInfo = new ProcessStartInfo();
+
+            pStartInfo.FileName = "netstat.exe";
+            pStartInfo.Arguments = "-a -n -o";
+            pStartInfo.WindowStyle = ProcessWindowStyle.Maximized;
+            pStartInfo.UseShellExecute = false;
+            pStartInfo.RedirectStandardInput = true;
+            pStartInfo.RedirectStandardOutput = true;
+            pStartInfo.RedirectStandardError = true;
+
+            var process = new Process()
             {
-                var item = DB.CheckDB(connection.RemoteEndPoint.Address.ToString());
+                StartInfo = pStartInfo
+            };
 
-                if (item == null)
+            process.Start();
+
+            var soStream = process.StandardOutput;
+
+            var output = soStream.ReadToEnd();
+
+            var lines = Regex.Split(output, "\r\n");
+
+            foreach (var line in lines)
+            {
+                string[] parts = null;
+
+                try
                 {
-                    item = new NetworkConnectionItem
+                    if (line.Trim().StartsWith("Proto") || line.Trim().StartsWith("UDP"))
                     {
-                        IPAddress = connection.RemoteEndPoint.Address.ToString(),
-                        Port = connection.RemoteEndPoint.Port,
-                        DetectedTime = DateTime.Now
-                    };
+                        continue;
+                    }
 
-                    item = await GetReverseLookupAsync(item);
+                    parts = line.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
+
+                    var len = parts.Length;
+
+                    if (len <= 2 || EMPTY_HOST.Contains(parts[2]) || parts[2].Contains(LOCALHOST))
+                    {
+                        continue;
+                    }
+
+                    var ipAddress = parts[2].Split(':')[0];
+                    var port = Convert.ToInt32(parts[2].Split(':')[1]);
+
+                    var pid = int.Parse(parts[len - 1]);
+
+                    var processName = UNKNOWN;
+                    var processFileName = UNKNOWN;
+
+                    var matchedProcess = processes.FirstOrDefault(a => a.Id == pid);
+
+                    if (matchedProcess != null)
+                    {
+                        processName = matchedProcess.ProcessName;
+
+                        try
+                        {
+                            processFileName = matchedProcess.MainModule?.FileName;
+                        }
+                        catch
+                        {
+                        }
+                    }
+
+                    var item = DB.CheckDB(ipAddress);
+
+                    if (item == null)
+                    {
+                        item = new NetworkConnectionItem
+                        {
+                            IPAddress = ipAddress,
+                            Port = port,
+                            DetectedTime = DateTime.Now,
+                            ProcessName = processName,
+                            ProcessFileName = processFileName
+                        };
+
+                        item = await GetReverseLookupAsync(item);
+                    }
+                    else
+                    {
+                        item.DetectedTime = DateTime.Now;
+                        item.ProcessName = processName;
+                        item.ProcessFileName = processFileName;
+                    }
+
+                    activeConnections.Add(item);
                 }
-                else
+                catch
                 {
-                    item.DetectedTime = DateTime.Now;
                 }
-
-                activeConnections.Add(item);
             }
 
             return activeConnections;

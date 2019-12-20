@@ -19,10 +19,10 @@ namespace NCAT
 
             DataContext = new MainViewModel();
 
-            ViewModel.OnNewConnections += ViewModel_OnNewConnections1; ;    
+            ViewModel.OnNewConnections += ViewModel_OnNewConnections;
         }
 
-        private void ViewModel_OnNewConnections1(object sender, System.EventArgs e)
+        private void ViewModel_OnNewConnections(object sender, System.EventArgs e)
         {
             bmMap.Children.Clear();
 
