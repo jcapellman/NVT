@@ -38,7 +38,7 @@ namespace NCAT
             var boundingBox = new LocationRect(ViewModel.Locations);
             
             bmMap.SetView(boundingBox);
-            bmMap.ZoomLevel = 3;
+            bmMap.ZoomLevel *= 0.85;
         }
     }
 }
