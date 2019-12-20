@@ -31,6 +31,7 @@
                     <GridViewColumn DisplayMemberBinding="{Binding Path=DetectedTime}" Header="Detection" Width="150"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=IPAddress}" Header="IP Address" Width="150"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Port}" Header="Port" Width="100" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=City}" Header="City" Width="150" />
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Country}" Header="Country" Width="150" />
                     <GridViewColumn DisplayMemberBinding="{Binding Path=ISP}" Header="ISP" Width="240" />
                 </GridView>
@@ -44,14 +45,16 @@
                             <ColumnDefinition Width="150" />
                             <ColumnDefinition Width="100" />
                             <ColumnDefinition Width="150" />
+                            <ColumnDefinition Width="150" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
                         <Label Grid.Column="0" Content="{Binding DetectedTime}" />
                         <Label Grid.Column="1" Content="{Binding IPAddress}" />
                         <Label Grid.Column="2" Content="{Binding Port}" />
-                        <Label Grid.Column="3" Content="{Binding Country}" />
-                        <Label Grid.Column="4" Content="{Binding ISP}" />
+                        <Label Grid.Column="3" Content="{Binding City}" />
+                        <Label Grid.Column="4" Content="{Binding Country}" />
+                        <Label Grid.Column="5" Content="{Binding ISP}" />
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

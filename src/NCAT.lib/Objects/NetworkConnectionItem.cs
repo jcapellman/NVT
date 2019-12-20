@@ -12,6 +12,8 @@ namespace NCAT.lib.Objects
 
         public string Country { get; set; }
 
+        public string City { get; set; }
+
         public string ISP { get; set; }
 
         public double Latitude { get; set; }

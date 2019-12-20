@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.NetworkInformation;
+using System.Text.Json;
 using System.Threading.Tasks;
 
+using NCAT.lib.JSONObjects;
 using NCAT.lib.Objects;
 
 namespace NCAT.lib
@@ -24,15 +26,13 @@ namespace NCAT.lib
                 try
                 {
                     var response =
-                        await HttpClient.GetAsync(new Uri($"http://ip-api.com/csv/{item.IPAddress}?fields=lat,lon,country,isp"));
+                        await HttpClient.GetAsync(new Uri($"http://ip-api.com/json/{item.IPAddress}?fields=country,city,lat,lon,isp"));
 
                     if (response.IsSuccessStatusCode)
                     {
-                        var csv = await response.Content.ReadAsStringAsync();
+                        var json = await response.Content.ReadAsStringAsync();
 
-                        csv = csv.Replace("\n", "");
-
-                        if (string.IsNullOrEmpty(csv))
+                        if (string.IsNullOrEmpty(json))
                         {
                             item.ISP = UNKNOWN;
                             item.Country = UNKNOWN;
@@ -40,12 +40,13 @@ namespace NCAT.lib
                             return item;
                         }
 
-                        var split = csv.Split(',');
+                        var ipObject = JsonSerializer.Deserialize<IPAPIJsonObject>(json);
 
-                        item.Latitude = Convert.ToDouble(split[1]);
-                        item.Longitude = Convert.ToDouble(split[2]);
-                        item.Country = split[0];
-                        item.ISP = split[3].Replace(@"""", string.Empty);
+                        item.Latitude = ipObject.lat;
+                        item.Longitude = ipObject.lon;
+                        item.Country = ipObject.country;
+                        item.ISP = ipObject.isp;
+                        item.City = ipObject.city;
 
                         DB.AddToDB(item);
 
