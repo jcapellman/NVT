@@ -1,7 +1,10 @@
-﻿using MahApps.Metro.Controls;
+﻿using System.Linq;
+
+using MahApps.Metro.Controls;
 
 using Microsoft.Maps.MapControl.WPF;
 
+using NCAT.lib;
 using NCAT.ViewModels;
 
 namespace NCAT
@@ -23,7 +26,7 @@ namespace NCAT
         {
             bmMap.Children.Clear();
 
-            foreach (var item in ViewModel.Connections)
+            foreach (var item in ViewModel.Connections.Where(a => a.ISP != TCPConnections.UNKNOWN))
             {
                 bmMap.Children.Add(new Pushpin
                 {
