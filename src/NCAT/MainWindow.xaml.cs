@@ -4,7 +4,6 @@ using MahApps.Metro.Controls;
 
 using Microsoft.Maps.MapControl.WPF;
 
-using NCAT.lib;
 using NCAT.ViewModels;
 
 namespace NCAT
@@ -26,11 +25,11 @@ namespace NCAT
         {
             bmMap.Children.Clear();
 
-            foreach (var item in ViewModel.Connections.Where(a => a.ISP != TCPConnections.UNKNOWN))
+            foreach (var item in ViewModel.Connections.Where(a => a.Latitude.HasValue && a.Longitude.HasValue))
             {
                 bmMap.Children.Add(new Pushpin
                 {
-                    Location = new Location(item.Latitude, item.Longitude),
+                    Location = new Location(item.Latitude.Value, item.Longitude.Value),
                     ToolTip = item.ISP
                 });
             }

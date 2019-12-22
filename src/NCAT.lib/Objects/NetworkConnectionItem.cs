@@ -16,9 +16,9 @@ namespace NCAT.lib.Objects
 
         public string ISP { get; set; }
 
-        public double Latitude { get; set; }
+        public double? Latitude { get; set; }
 
-        public double Longitude { get; set; }
+        public double? Longitude { get; set; }
 
         public DateTime DetectedTime { get; set; }
 
