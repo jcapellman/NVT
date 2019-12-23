@@ -8,6 +8,7 @@
         xmlns:wpf="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
         mc:Ignorable="d"
         ShowIconOnTitleBar="False"
+        GlowBrush="Black"
         WindowStartupLocation="CenterScreen"
         Title="NCAT" ResizeMode="NoResize" Height="720" Width="1280">
     <Window.DataContext>
