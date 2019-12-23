@@ -31,7 +31,7 @@ namespace NCAT.ViewModels
         }
 
         public List<Location> Locations =>
-            Connections.Select(a => new Location(a.Latitude, a.Longitude)).ToList();
+            Connections.Where(a => a.Latitude.HasValue && a.Longitude.HasValue).Select(a => new Location(a.Latitude.Value, a.Longitude.Value)).ToList();
 
         private BackgroundWorker _bwConnections;
 
