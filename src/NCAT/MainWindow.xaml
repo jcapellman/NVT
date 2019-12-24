@@ -38,17 +38,14 @@
 
         <Grid Grid.Row="0" Visibility="{Binding MainGridVisibility, Mode=TwoWay}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="50" />
                 <RowDefinition Height="300" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource MetroLabel}" Content="Active TCP Connections" />
+            <wpf:Map Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Visibility="{Binding MapVisibility}" x:Name="bmMap" CredentialsProvider="AofM3Qx9ySMc6cYJ5iSz0UI_gs1vgdzRgWSmGqIvYvf3W36A2cJQvrAK99AMhOYM" ZoomLevel="12" />
 
-            <wpf:Map Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" x:Name="bmMap" CredentialsProvider="AofM3Qx9ySMc6cYJ5iSz0UI_gs1vgdzRgWSmGqIvYvf3W36A2cJQvrAK99AMhOYM" ZoomLevel="12" />
-
-            <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding Connections}">
+            <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding Connections}">
                 <ListView.View>
                     <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Network Connection">
                         <GridViewColumn DisplayMemberBinding="{Binding Path=DetectedTime}" Header="Detection" Width="150"/>
@@ -86,7 +83,7 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <Grid Grid.Row="3" Background="#1e1e1e" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,5,0,5">
+            <Grid Grid.Row="2" Background="#1e1e1e" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,5,0,0">
                 <Label Content="{Binding CurrentStatus}" />
             </Grid>
         </Grid>
