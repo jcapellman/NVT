@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Linq;
+using System.Windows;
 
 using MahApps.Metro.Controls;
 
 using Microsoft.Maps.MapControl.WPF;
+using Microsoft.Win32;
 
 using NCAT.ViewModels;
 
@@ -75,6 +77,29 @@ namespace NCAT
         private void btnAbout_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             foAbout.IsOpen = !foAbout.IsOpen;
+        }
+
+        private void btnExport_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            var ofd = new SaveFileDialog
+            {
+                DefaultExt = ".json",
+
+                Filter = "json|*.json",
+
+                AddExtension = true
+            };
+
+            var result = ofd.ShowDialog();
+
+            if (!result.HasValue)
+            {
+                return;
+            }
+
+            ViewModel.ExportConnections(ofd.FileName);
+
+            MessageBox.Show($"Exported to {ofd.FileName}");
         }
     }
 }

@@ -19,6 +19,10 @@
 
     <mah:MetroWindow.RightWindowCommands>
         <mah:WindowCommands>
+            <Button VerticalAlignment="Center" Click="btnExport_Click">
+                <iconpacks:PackIconMaterial VerticalAlignment="Center" Kind="Export" />
+            </Button>
+
             <Button VerticalAlignment="Center" Click="btnSettings_Click">
                 <iconpacks:PackIconMaterial VerticalAlignment="Center" Kind="Settings" />
             </Button>
@@ -116,7 +120,7 @@
                             <Label Grid.Column="7" Content="{Binding ProcessFileName}" />
 
                             <Grid Grid.Column="8">
-                                <Button Click="Button_Click">
+                                <Button>
                                     <iconpacks:PackIconMaterial Kind="Stop" />
                                 </Button>
                             </Grid>

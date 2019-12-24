@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text.Json;
 using System.Windows;
 
 using Microsoft.Maps.MapControl.WPF;
@@ -106,6 +108,13 @@ namespace NCAT.ViewModels
             Connections.Where(a => a.Latitude.HasValue && a.Longitude.HasValue).Select(a => new Location(a.Latitude.Value, a.Longitude.Value)).ToList();
 
         private BackgroundWorker _bwConnections;
+
+        public void ExportConnections(string fileName)
+        {
+            var json = JsonSerializer.Serialize(Connections);
+
+            File.WriteAllText(fileName, json);
+        }
 
         private readonly ConnectionManager connectionManager = new ConnectionManager();
 
