@@ -44,7 +44,7 @@
 
         <Grid Grid.Row="0" Visibility="{Binding MainGridVisibility, Mode=TwoWay}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="300" />
+                <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>

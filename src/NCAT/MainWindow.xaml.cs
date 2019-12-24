@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 using MahApps.Metro.Controls;
 
@@ -46,10 +47,16 @@ namespace NCAT
                 return;
             }
 
-            var boundingBox = new LocationRect(ViewModel.Locations.OrderBy(a => a.Latitude).ToList());
-            
-            bmMap.SetView(boundingBox);
-            bmMap.ZoomLevel *= 0.85;
+            try
+            {
+                var boundingBox = new LocationRect(ViewModel.Locations.OrderBy(a => a.Latitude).ToList());
+
+                bmMap.SetView(boundingBox);
+                bmMap.ZoomLevel *= 0.85;
+            } catch (Exception ex)
+            {
+                // LOG
+            }
         }
 
         private void btnSettings_Click(object sender, System.Windows.RoutedEventArgs e)
