@@ -11,11 +11,20 @@
         ShowIconOnTitleBar="False"
         GlowBrush="Black"
         WindowStartupLocation="CenterScreen"
+        WindowButtonCommandsOverlayBehavior="Always"
         Title="NCAT" ResizeMode="NoResize" Height="720" Width="1280">
     <Window.DataContext>
         <viewModels:MainViewModel />
     </Window.DataContext>
 
+    <mah:MetroWindow.RightWindowCommands>
+        <mah:WindowCommands>
+            <Button VerticalAlignment="Center" Click="btnSettings_Click">
+                <iconpacks:PackIconMaterial VerticalAlignment="Center" Kind="Settings" />
+            </Button>
+        </mah:WindowCommands>
+    </mah:MetroWindow.RightWindowCommands>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
