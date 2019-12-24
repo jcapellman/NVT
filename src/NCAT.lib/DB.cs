@@ -1,4 +1,6 @@
-﻿using LiteDB;
+﻿using System;
+
+using LiteDB;
 
 using NCAT.lib.Objects;
 
@@ -10,6 +12,11 @@ namespace NCAT.lib
 
         public static NetworkConnectionItem CheckDB(string ipAddress)
         {
+            if (string.IsNullOrEmpty(ipAddress))
+            {
+                throw new ArgumentNullException(nameof(ipAddress));
+            }
+
             using (var db = new LiteDatabase(DB_FILENAME))
             {
                 var items = db.GetCollection<NetworkConnectionItem>();
@@ -20,6 +27,11 @@ namespace NCAT.lib
 
         public static void AddToDB(NetworkConnectionItem item)
         {
+            if (item == null)
+            {
+                throw new ArgumentNullException(nameof(item));
+            }
+
             using (var db = new LiteDatabase(DB_FILENAME))
             {
                 var items = db.GetCollection<NetworkConnectionItem>();
