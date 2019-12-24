@@ -41,10 +41,12 @@ namespace NCAT
 
             if (ViewModel.Locations.Count == 1)
             {
+                bmMap.Center = ViewModel.Locations.FirstOrDefault();
+
                 return;
             }
 
-            var boundingBox = new LocationRect(ViewModel.Locations);
+            var boundingBox = new LocationRect(ViewModel.Locations.OrderBy(a => a.Latitude).ToList());
             
             bmMap.SetView(boundingBox);
             bmMap.ZoomLevel *= 0.85;
