@@ -33,7 +33,13 @@
         </mah:Flyout>
 
         <Grid Grid.Row="0" Visibility="{Binding EmptyGridVisibility, Mode=TwoWay}">
-            <Label Content="No TCP Connections found" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24" />
+            <Label VerticalAlignment="Center" HorizontalAlignment="Center">
+                <StackPanel Orientation="Vertical">
+                    <Label Content="No current TCP Connections found" FontSize="24" />
+                    <mah:MetroProgressBar IsIndeterminate="True" />
+                    <Label Content="(actively querying)" HorizontalAlignment="Center" FontSize="12" />
+                </StackPanel>
+            </Label>
         </Grid>
 
         <Grid Grid.Row="0" Visibility="{Binding MainGridVisibility, Mode=TwoWay}">
