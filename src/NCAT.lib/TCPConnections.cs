@@ -14,7 +14,10 @@ namespace NCAT.lib
 {
     public static class TCPConnections
     {
-        private static readonly HttpClient HttpClient = new HttpClient();
+        private static readonly HttpClient HttpClient = new HttpClient
+        {
+            Timeout = TimeSpan.FromSeconds(1)
+        };
 
         public const string UNKNOWN = "<UNKNOWN>";
 
@@ -56,7 +59,7 @@ namespace NCAT.lib
                         return item;
                     }
                 }
-                catch (HttpRequestException hre)
+                catch (Exception ex)
                 {
                     // Log
                 }
@@ -75,11 +78,12 @@ namespace NCAT.lib
 
             pStartInfo.FileName = "netstat.exe";
             pStartInfo.Arguments = "-a -n -o";
-            pStartInfo.WindowStyle = ProcessWindowStyle.Maximized;
+            pStartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             pStartInfo.UseShellExecute = false;
             pStartInfo.RedirectStandardInput = true;
             pStartInfo.RedirectStandardOutput = true;
             pStartInfo.RedirectStandardError = true;
+            pStartInfo.CreateNoWindow = true;
 
             var process = new Process()
             {
@@ -147,7 +151,10 @@ namespace NCAT.lib
                             Port = port,
                             DetectedTime = DateTime.Now,
                             ProcessName = processName,
-                            ProcessFileName = processFileName
+                            ProcessFileName = processFileName,
+                            ISP = UNKNOWN,
+                            Country = UNKNOWN,
+                            City = UNKNOWN
                         };
 
                         item = await GetReverseLookupAsync(item);
