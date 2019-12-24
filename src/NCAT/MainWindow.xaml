@@ -11,8 +11,10 @@
         ShowIconOnTitleBar="False"
         GlowBrush="Black"
         WindowStartupLocation="CenterScreen"
+        ShowMinButton="True"
+        ShowMaxRestoreButton="True"
         WindowButtonCommandsOverlayBehavior="Always"
-        Title="NCAT" ResizeMode="NoResize" MinHeight="720" MinWidth="1280">
+        Title="NCAT" ResizeMode="CanResize" MinHeight="720" MinWidth="1280">
     <Window.DataContext>
         <viewModels:MainViewModel />
     </Window.DataContext>
