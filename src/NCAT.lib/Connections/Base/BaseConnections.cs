@@ -12,67 +12,26 @@ using NCAT.lib.Objects;
 
 using NLog;
 
-namespace NCAT.lib
+namespace NCAT.lib.Connections.Base
 {
-    public static class TCPConnections
+    public abstract class BaseConnections
     {
-        private static readonly Logger Log = LogManager.GetCurrentClassLogger();
+        protected static readonly Logger Log = LogManager.GetCurrentClassLogger();
 
-        private static readonly HttpClient HttpClient = new HttpClient
+        protected static readonly HttpClient HttpClient = new HttpClient
         {
             Timeout = TimeSpan.FromSeconds(1)
         };
 
         public const string UNKNOWN = "<UNKNOWN>";
 
-        private static string[] EMPTY_HOST = { "0.0.0.0:0", "[::]:0" };
+        protected string[] EMPTY_HOST = { "0.0.0.0:0", "[::]:0" };
 
-        private const string LOCALHOST = "127.0.0.1";
+        protected const string LOCALHOST = "127.0.0.1";
 
-        private static async Task<NetworkConnectionItem> GetReverseLookupAsync(NetworkConnectionItem item)
-        {
-            if (item.IPAddress != LOCALHOST)
-            {
-                try
-                {
-                    var response =
-                        await HttpClient.GetAsync(new Uri($"http://ip-api.com/json/{item.IPAddress}?fields=country,city,lat,lon,isp"));
+        public abstract string ConnectionType { get; }
 
-                    if (response.IsSuccessStatusCode)
-                    {
-                        var json = await response.Content.ReadAsStringAsync();
-
-                        if (string.IsNullOrEmpty(json))
-                        {
-                            item.ISP = UNKNOWN;
-                            item.Country = UNKNOWN;
-
-                            return item;
-                        }
-
-                        var ipObject = JsonSerializer.Deserialize<IPAPIJsonObject>(json);
-
-                        item.Latitude = ipObject.lat;
-                        item.Longitude = ipObject.lon;
-                        item.Country = ipObject.country;
-                        item.ISP = ipObject.isp;
-                        item.City = ipObject.city;
-
-                        DB.AddToDB(item);
-
-                        return item;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Log.Error($"Error when retrieving the reverse lookup: {ex}");
-                }
-            }
-
-            return item;
-        }
-
-        public static async Task<List<NetworkConnectionItem>> GetConnectionsAsync()
+        public async Task<List<NetworkConnectionItem>> GetConnectionsAsync()
         {
             var processes = Process.GetProcesses();
 
@@ -108,12 +67,12 @@ namespace NCAT.lib
 
                 try
                 {
-                    if (line.Trim().StartsWith("Proto") || line.Trim().StartsWith("UDP"))
+                    if (!line.Trim().StartsWith(ConnectionType))
                     {
                         continue;
                     }
 
-                    parts = line.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
+                    parts = line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
                     var len = parts.Length;
 
@@ -179,6 +138,49 @@ namespace NCAT.lib
             }
 
             return activeConnections;
+        }
+
+        protected static async Task<NetworkConnectionItem> GetReverseLookupAsync(NetworkConnectionItem item)
+        {
+            if (item.IPAddress != LOCALHOST)
+            {
+                try
+                {
+                    var response =
+                        await HttpClient.GetAsync(new Uri($"http://ip-api.com/json/{item.IPAddress}?fields=country,city,lat,lon,isp"));
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var json = await response.Content.ReadAsStringAsync();
+
+                        if (string.IsNullOrEmpty(json))
+                        {
+                            item.ISP = UNKNOWN;
+                            item.Country = UNKNOWN;
+
+                            return item;
+                        }
+
+                        var ipObject = JsonSerializer.Deserialize<IPAPIJsonObject>(json);
+
+                        item.Latitude = ipObject.lat;
+                        item.Longitude = ipObject.lon;
+                        item.Country = ipObject.country;
+                        item.ISP = ipObject.isp;
+                        item.City = ipObject.city;
+
+                        DB.AddToDB(item);
+
+                        return item;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.Error($"Error when retrieving the reverse lookup: {ex}");
+                }
+            }
+
+            return item;
         }
     }
 }

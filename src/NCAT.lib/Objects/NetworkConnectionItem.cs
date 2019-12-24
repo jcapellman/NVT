@@ -6,6 +6,8 @@ namespace NCAT.lib.Objects
     {
         public int Id { get; set; }
 
+        public string ConnectionType { get; set; }
+
         public string IPAddress { get; set; }
 
         public int Port { get; set; }

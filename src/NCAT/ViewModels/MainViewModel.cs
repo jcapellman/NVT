@@ -8,7 +8,7 @@ using System.Windows;
 
 using Microsoft.Maps.MapControl.WPF;
 
-using NCAT.lib;
+using NCAT.lib.Managers;
 using NCAT.lib.Objects;
 
 using NLog;
@@ -107,6 +107,8 @@ namespace NCAT.ViewModels
 
         private BackgroundWorker _bwConnections;
 
+        private readonly ConnectionManager connectionManager = new ConnectionManager();
+
         public MainViewModel()
         {
             MainGridVisibility = Visibility.Collapsed;
@@ -129,7 +131,7 @@ namespace NCAT.ViewModels
 
         private async void _bwConnections_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            var newConnections = await TCPConnections.GetConnectionsAsync();
+            var newConnections = await connectionManager.GetConnectionsAsync(connectionManager.SupportedConnectionTypes);
 
             Log.Debug($"Received {newConnections.Count} connections");
 
