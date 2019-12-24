@@ -6,7 +6,8 @@
         xmlns:viewModels="clr-namespace:NCAT.ViewModels"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:wpf="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
-        mc:Ignorable="d"
+                 xmlns:iconpacks="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.Material"
+                 mc:Ignorable="d"
         ShowIconOnTitleBar="False"
         GlowBrush="Black"
         WindowStartupLocation="CenterScreen"
@@ -17,51 +18,77 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="300" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" Style="{StaticResource MetroLabel}" Content="Active TCP Connections" />
+        <mah:Flyout x:Name="foSettings" Header="Settings" Position="Right" Width="200">
+            <Grid>
+                <Button>
+                    <StackPanel Orientation="Vertical">
+                        <iconpacks:PackIconMaterial Kind="ContentSave" />
+                        <Label Content="save" />
+                    </StackPanel>
+                </Button>
+            </Grid>
+        </mah:Flyout>
 
-        <wpf:Map Grid.Row="1" x:Name="bmMap" CredentialsProvider="AofM3Qx9ySMc6cYJ5iSz0UI_gs1vgdzRgWSmGqIvYvf3W36A2cJQvrAK99AMhOYM" ZoomLevel="12" />
+        <Grid Grid.Row="0" Visibility="{Binding EmptyGridVisibility, Mode=TwoWay}">
+            <Label Content="No TCP Connections found" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24" />
+        </Grid>
 
-        <ListView Grid.Row="2" ItemsSource="{Binding Connections}">
-            <ListView.View>
-                <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Network Connection">
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=DetectedTime}" Header="Detection" Width="150"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=IPAddress}" Header="IP Address" Width="150"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Port}" Header="Port" Width="100" />
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=City}" Header="City" Width="150" />
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Country}" Header="Country" Width="150" />
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=ISP}" Header="ISP" Width="150" />
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=ProcessFileName}" Header="Process File Name" Width="350" />
-                </GridView>
-            </ListView.View>
+        <Grid Grid.Row="0" Visibility="{Binding MainGridVisibility, Mode=TwoWay}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="300" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="150" />
-                            <ColumnDefinition Width="150" />
-                            <ColumnDefinition Width="100" />
-                            <ColumnDefinition Width="150" />
-                            <ColumnDefinition Width="150" />
-                            <ColumnDefinition Width="150" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource MetroLabel}" Content="Active TCP Connections" />
 
-                        <Label Grid.Column="0" Content="{Binding DetectedTime}" />
-                        <Label Grid.Column="1" Content="{Binding IPAddress}" />
-                        <Label Grid.Column="2" Content="{Binding Port}" />
-                        <Label Grid.Column="3" Content="{Binding City}" />
-                        <Label Grid.Column="4" Content="{Binding Country}" />
-                        <Label Grid.Column="5" Content="{Binding ISP}" />
-                        <Label Grid.Column="6" Content="{Binding ProcessFileName}" />
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            <wpf:Map Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" x:Name="bmMap" CredentialsProvider="AofM3Qx9ySMc6cYJ5iSz0UI_gs1vgdzRgWSmGqIvYvf3W36A2cJQvrAK99AMhOYM" ZoomLevel="12" />
+
+            <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding Connections}">
+                <ListView.View>
+                    <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Network Connection">
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=DetectedTime}" Header="Detection" Width="150"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=IPAddress}" Header="IP Address" Width="150"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Port}" Header="Port" Width="100" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=City}" Header="City" Width="150" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Country}" Header="Country" Width="150" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=ISP}" Header="ISP" Width="150" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=ProcessFileName}" Header="Process File Name" Width="350" />
+                    </GridView>
+                </ListView.View>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Column="0" Content="{Binding DetectedTime}" />
+                            <Label Grid.Column="1" Content="{Binding IPAddress}" />
+                            <Label Grid.Column="2" Content="{Binding Port}" />
+                            <Label Grid.Column="3" Content="{Binding City}" />
+                            <Label Grid.Column="4" Content="{Binding Country}" />
+                            <Label Grid.Column="5" Content="{Binding ISP}" />
+                            <Label Grid.Column="6" Content="{Binding ProcessFileName}" />
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Grid Grid.Row="3" Background="#1e1e1e" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,5,0,5">
+                <Label Content="{Binding CurrentStatus}" />
+            </Grid>
+        </Grid>
     </Grid>
 </mah:MetroWindow>

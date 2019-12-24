@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Windows;
 
 using Microsoft.Maps.MapControl.WPF;
 
@@ -14,6 +15,34 @@ namespace NCAT.ViewModels
 {
     public class MainViewModel : INotifyPropertyChanged
     {
+        private Visibility _mainGridVisibility;
+
+        public Visibility MainGridVisibility
+        {
+            get => _mainGridVisibility;
+
+            set
+            {
+                _mainGridVisibility = value;
+
+                OnPropertyChanged();
+            }
+        }
+
+        private Visibility _emptyGridVisibility;
+
+        public Visibility EmptyGridVisibility
+        {
+            get => _emptyGridVisibility;
+
+            set
+            {
+                _emptyGridVisibility = value;
+
+                OnPropertyChanged();
+            }
+        }
+
         public event EventHandler OnNewConnections;
 
         private ObservableCollection<NetworkConnectionItem> _connections;
@@ -30,6 +59,29 @@ namespace NCAT.ViewModels
             }
         }
 
+        private string _currenStatus;
+
+        public string CurrentStatus
+        {
+            get => _currenStatus;
+
+            set
+            {
+                _currenStatus = value;
+                OnPropertyChanged();
+
+                if (Connections.Any())
+                {
+                    EmptyGridVisibility = Visibility.Collapsed;
+                    MainGridVisibility = Visibility.Visible;
+                } else
+                {
+                    EmptyGridVisibility = Visibility.Visible;
+                    MainGridVisibility = Visibility.Collapsed;
+                }
+            }
+        }
+
         public List<Location> Locations =>
             Connections.Where(a => a.Latitude.HasValue && a.Longitude.HasValue).Select(a => new Location(a.Latitude.Value, a.Longitude.Value)).ToList();
 
@@ -37,6 +89,9 @@ namespace NCAT.ViewModels
 
         public MainViewModel()
         {
+            MainGridVisibility = Visibility.Collapsed;
+            EmptyGridVisibility = Visibility.Visible;
+
             Connections = new ObservableCollection<NetworkConnectionItem>();
             
             _bwConnections = new BackgroundWorker();
@@ -71,6 +126,8 @@ namespace NCAT.ViewModels
             }
 
             OnNewConnections?.Invoke(null, null);
+
+            CurrentStatus = $"{newConnections.Count} connection(s) found";
 
             _bwConnections.RunWorkerAsync();
         }
