@@ -25,6 +25,11 @@ namespace NCAT
         {
             bmMap.Children.Clear();
 
+            if (!ViewModel.Locations.Any())
+            {
+                return;
+            }
+
             foreach (var item in ViewModel.Connections.Where(a => a.Latitude.HasValue && a.Longitude.HasValue))
             {
                 bmMap.Children.Add(new Pushpin
@@ -34,10 +39,20 @@ namespace NCAT
                 });
             }
 
+            if (ViewModel.Locations.Count == 1)
+            {
+                return;
+            }
+
             var boundingBox = new LocationRect(ViewModel.Locations);
             
             bmMap.SetView(boundingBox);
             bmMap.ZoomLevel *= 0.85;
+        }
+
+        private void btnSettings_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            foSettings.IsOpen = !foSettings.IsOpen;
         }
     }
 }
