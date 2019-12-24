@@ -43,6 +43,20 @@ namespace NCAT.ViewModels
             }
         }
 
+        private Visibility _mapVisibility;
+
+        public Visibility MapVisibility
+        {
+            get => _mapVisibility;
+
+            set
+            {
+                _mapVisibility = value;
+
+                OnPropertyChanged();
+            }
+        }
+
         public event EventHandler OnNewConnections;
 
         private ObservableCollection<NetworkConnectionItem> _connections;
@@ -79,6 +93,8 @@ namespace NCAT.ViewModels
                     EmptyGridVisibility = Visibility.Visible;
                     MainGridVisibility = Visibility.Collapsed;
                 }
+
+                MapVisibility = Locations.Any() ? Visibility.Visible : Visibility.Collapsed;
             }
         }
 
@@ -127,7 +143,7 @@ namespace NCAT.ViewModels
 
             OnNewConnections?.Invoke(null, null);
 
-            CurrentStatus = $"{newConnections.Count} connection(s) found";
+            CurrentStatus = $"{Connections.Count} connection(s) found";
 
             _bwConnections.RunWorkerAsync();
         }
