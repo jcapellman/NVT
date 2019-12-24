@@ -22,6 +22,10 @@
             <Button VerticalAlignment="Center" Click="btnSettings_Click">
                 <iconpacks:PackIconMaterial VerticalAlignment="Center" Kind="Settings" />
             </Button>
+
+            <Button Click="btnAbout_Click">
+                <iconpacks:PackIconMaterial VerticalAlignment="Center" Kind="Help" />
+            </Button>
         </mah:WindowCommands>
     </mah:MetroWindow.RightWindowCommands>
     
@@ -30,7 +34,20 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <mah:Flyout x:Name="foSettings" Header="Settings" Position="Right" Width="200">
+        <mah:Flyout x:Name="foAbout" Header="About" Position="Right" Width="250">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" TextWrapping="Wrap" Text="NCAT is a Network Connection Tool to better inform you as the end-user what connections are on your machine" />
+
+                <TextBlock Grid.Row="1" Text="https://github.com/jcapellman/NCAT/" />
+            </Grid>
+        </mah:Flyout>
+        
+        <mah:Flyout x:Name="foSettings" Header="Settings" Position="Right" Width="400">
             <Grid>
                 <Button>
                     <StackPanel Orientation="Vertical">

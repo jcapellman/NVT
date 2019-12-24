@@ -63,5 +63,10 @@ namespace NCAT
         {
             foSettings.IsOpen = !foSettings.IsOpen;
         }
+
+        private void btnAbout_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            foAbout.IsOpen = !foAbout.IsOpen;
+        }
     }
 }
