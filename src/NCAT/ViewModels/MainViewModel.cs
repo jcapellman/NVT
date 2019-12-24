@@ -11,10 +11,14 @@ using Microsoft.Maps.MapControl.WPF;
 using NCAT.lib;
 using NCAT.lib.Objects;
 
+using NLog;
+
 namespace NCAT.ViewModels
 {
     public class MainViewModel : INotifyPropertyChanged
     {
+        private static readonly Logger Log = LogManager.GetCurrentClassLogger();
+
         private Visibility _mainGridVisibility;
 
         public Visibility MainGridVisibility
@@ -126,6 +130,8 @@ namespace NCAT.ViewModels
         private async void _bwConnections_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             var newConnections = await TCPConnections.GetConnectionsAsync();
+
+            Log.Debug($"Received {newConnections.Count} connections");
 
             for (var x = 0; x < Connections.Count; x++)
             {

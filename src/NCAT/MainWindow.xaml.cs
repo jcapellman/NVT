@@ -7,10 +7,14 @@ using Microsoft.Maps.MapControl.WPF;
 
 using NCAT.ViewModels;
 
+using NLog;
+
 namespace NCAT
 {
     public partial class MainWindow : MetroWindow
     {
+        private static readonly Logger Log = LogManager.GetCurrentClassLogger();
+
         private MainViewModel ViewModel => (MainViewModel) DataContext;
 
         public MainWindow()
@@ -28,6 +32,8 @@ namespace NCAT
 
             if (!ViewModel.Locations.Any())
             {
+                Log.Debug("No locations found - not updating the map");
+
                 return;
             }
 
@@ -42,6 +48,8 @@ namespace NCAT
 
             if (ViewModel.Locations.Count == 1)
             {
+                Log.Debug("Only 1 location found, setting the Center of the Map to the location");
+
                 bmMap.Center = ViewModel.Locations.FirstOrDefault();
 
                 return;
@@ -55,7 +63,7 @@ namespace NCAT
                 bmMap.ZoomLevel *= 0.85;
             } catch (Exception ex)
             {
-                // LOG
+                Log.Error($"Exception when setting the view: {ex}");
             }
         }
 

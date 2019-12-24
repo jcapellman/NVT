@@ -10,10 +10,14 @@ using System.Threading.Tasks;
 using NCAT.lib.JSONObjects;
 using NCAT.lib.Objects;
 
+using NLog;
+
 namespace NCAT.lib
 {
     public static class TCPConnections
     {
+        private static readonly Logger Log = LogManager.GetCurrentClassLogger();
+
         private static readonly HttpClient HttpClient = new HttpClient
         {
             Timeout = TimeSpan.FromSeconds(1)
@@ -61,7 +65,7 @@ namespace NCAT.lib
                 }
                 catch (Exception ex)
                 {
-                    // Log
+                    Log.Error($"Error when retrieving the reverse lookup: {ex}");
                 }
             }
 
@@ -168,8 +172,9 @@ namespace NCAT.lib
 
                     activeConnections.Add(item);
                 }
-                catch
+                catch (Exception ex)
                 {
+                    Log.Error($"Error occurred on populating the network items: {ex}");
                 }
             }
 
