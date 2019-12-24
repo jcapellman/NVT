@@ -21,15 +21,15 @@
 
     <mah:MetroWindow.RightWindowCommands>
         <mah:WindowCommands>
-            <Button VerticalAlignment="Center" Click="btnExport_Click">
+            <Button VerticalAlignment="Center" Click="btnExport_Click" ToolTip="Export Connections to File">
                 <iconpacks:PackIconMaterial VerticalAlignment="Center" Kind="Export" />
             </Button>
 
-            <Button VerticalAlignment="Center" Click="btnSettings_Click">
+            <Button VerticalAlignment="Center" Click="btnSettings_Click" ToolTip="Settings">
                 <iconpacks:PackIconMaterial VerticalAlignment="Center" Kind="Settings" />
             </Button>
 
-            <Button Click="btnAbout_Click">
+            <Button Click="btnAbout_Click" ToolTip="About">
                 <iconpacks:PackIconMaterial VerticalAlignment="Center" Kind="Help" />
             </Button>
         </mah:WindowCommands>
