@@ -81,6 +81,7 @@
                 <ListView.View>
                     <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Network Connection">
                         <GridViewColumn DisplayMemberBinding="{Binding Path=DetectedTime}" Header="Detection" Width="150"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=ConnectionType}" Header="Type" Width="50"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=IPAddress}" Header="IP Address" Width="150"/>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=Port}" Header="Port" Width="100" />
                         <GridViewColumn DisplayMemberBinding="{Binding Path=City}" Header="City" Width="150" />
@@ -95,6 +96,7 @@
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="50" />
                                 <ColumnDefinition Width="150" />
                                 <ColumnDefinition Width="100" />
                                 <ColumnDefinition Width="150" />
@@ -104,12 +106,13 @@
                             </Grid.ColumnDefinitions>
 
                             <Label Grid.Column="0" Content="{Binding DetectedTime}" />
-                            <Label Grid.Column="1" Content="{Binding IPAddress}" />
-                            <Label Grid.Column="2" Content="{Binding Port}" />
-                            <Label Grid.Column="3" Content="{Binding City}" />
-                            <Label Grid.Column="4" Content="{Binding Country}" />
-                            <Label Grid.Column="5" Content="{Binding ISP}" />
-                            <Label Grid.Column="6" Content="{Binding ProcessFileName}" />
+                            <Label Grid.Column="1" Content="{Binding ConnectionType}" />
+                            <Label Grid.Column="2" Content="{Binding IPAddress}" />
+                            <Label Grid.Column="3" Content="{Binding Port}" />
+                            <Label Grid.Column="4" Content="{Binding City}" />
+                            <Label Grid.Column="5" Content="{Binding Country}" />
+                            <Label Grid.Column="6" Content="{Binding ISP}" />
+                            <Label Grid.Column="7" Content="{Binding ProcessFileName}" />
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>

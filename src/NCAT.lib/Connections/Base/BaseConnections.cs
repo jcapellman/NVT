@@ -117,7 +117,8 @@ namespace NCAT.lib.Connections.Base
                             ProcessFileName = processFileName,
                             ISP = UNKNOWN,
                             Country = UNKNOWN,
-                            City = UNKNOWN
+                            City = UNKNOWN,
+                            ConnectionType = ConnectionType
                         };
 
                         item = await GetReverseLookupAsync(item);
@@ -127,6 +128,7 @@ namespace NCAT.lib.Connections.Base
                         item.DetectedTime = DateTime.Now;
                         item.ProcessName = processName;
                         item.ProcessFileName = processFileName;
+                        item.ConnectionType = ConnectionType;
                     }
 
                     activeConnections.Add(item);
