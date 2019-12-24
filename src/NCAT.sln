@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NCAT", "NCAT\NCAT.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NCAT.lib", "NCAT.lib\NCAT.lib.csproj", "{A6259EDE-DCAC-40AA-BEE8-508544B63EB2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NCAT.UnitTests", "NCAT.UnitTests\NCAT.UnitTests.csproj", "{63AF19FB-06A6-4621-B71C-5D8132CBC4C9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,14 @@ Global
 		{A6259EDE-DCAC-40AA-BEE8-508544B63EB2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A6259EDE-DCAC-40AA-BEE8-508544B63EB2}.Release|x64.ActiveCfg = Release|Any CPU
 		{A6259EDE-DCAC-40AA-BEE8-508544B63EB2}.Release|x64.Build.0 = Release|Any CPU
+		{63AF19FB-06A6-4621-B71C-5D8132CBC4C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63AF19FB-06A6-4621-B71C-5D8132CBC4C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63AF19FB-06A6-4621-B71C-5D8132CBC4C9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{63AF19FB-06A6-4621-B71C-5D8132CBC4C9}.Debug|x64.Build.0 = Debug|Any CPU
+		{63AF19FB-06A6-4621-B71C-5D8132CBC4C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63AF19FB-06A6-4621-B71C-5D8132CBC4C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63AF19FB-06A6-4621-B71C-5D8132CBC4C9}.Release|x64.ActiveCfg = Release|Any CPU
+		{63AF19FB-06A6-4621-B71C-5D8132CBC4C9}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
