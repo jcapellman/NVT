@@ -12,7 +12,7 @@
         GlowBrush="Black"
         WindowStartupLocation="CenterScreen"
         WindowButtonCommandsOverlayBehavior="Always"
-        Title="NCAT" ResizeMode="NoResize" Height="720" Width="1280">
+        Title="NCAT" ResizeMode="NoResize" MinHeight="720" MinWidth="1280">
     <Window.DataContext>
         <viewModels:MainViewModel />
     </Window.DataContext>
@@ -80,14 +80,15 @@
             <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding Connections}">
                 <ListView.View>
                     <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Network Connection">
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=DetectedTime}" Header="Detection" Width="150"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=ConnectionType}" Header="Type" Width="50"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=IPAddress}" Header="IP Address" Width="150"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=Port}" Header="Port" Width="100" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=DetectedTime}" Header="Detection" Width="150" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=ConnectionType}" Header="Type" Width="50" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=IPAddress}" Header="IP Address" Width="100"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Port}" Header="Port" Width="75" />
                         <GridViewColumn DisplayMemberBinding="{Binding Path=City}" Header="City" Width="150" />
                         <GridViewColumn DisplayMemberBinding="{Binding Path=Country}" Header="Country" Width="150" />
                         <GridViewColumn DisplayMemberBinding="{Binding Path=ISP}" Header="ISP" Width="150" />
                         <GridViewColumn DisplayMemberBinding="{Binding Path=ProcessFileName}" Header="Process File Name" Width="350" />
+                        <GridViewColumn Header="Actions" Width="100" />
                     </GridView>
                 </ListView.View>
 
@@ -97,8 +98,8 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="150" />
                                 <ColumnDefinition Width="50" />
-                                <ColumnDefinition Width="150" />
                                 <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="75" />
                                 <ColumnDefinition Width="150" />
                                 <ColumnDefinition Width="150" />
                                 <ColumnDefinition Width="150" />
@@ -113,6 +114,12 @@
                             <Label Grid.Column="5" Content="{Binding Country}" />
                             <Label Grid.Column="6" Content="{Binding ISP}" />
                             <Label Grid.Column="7" Content="{Binding ProcessFileName}" />
+
+                            <Grid Grid.Column="8">
+                                <Button Click="Button_Click">
+                                    <iconpacks:PackIconMaterial Kind="Stop" />
+                                </Button>
+                            </Grid>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
