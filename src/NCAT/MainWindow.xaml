@@ -21,7 +21,7 @@
 
     <mah:MetroWindow.RightWindowCommands>
         <mah:WindowCommands>
-            <Button VerticalAlignment="Center" Click="btnExport_Click" ToolTip="Export Connections to File">
+            <Button VerticalAlignment="Center" Click="btnExport_Click" IsEnabled="{Binding ExportBtnEnabled}" ToolTip="Export Connections to File">
                 <iconpacks:PackIconMaterial VerticalAlignment="Center" Kind="Export" />
             </Button>
 

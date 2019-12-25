@@ -21,6 +21,20 @@ namespace NCAT.ViewModels
     {
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
 
+        private bool _exportBtnEnabled;
+
+        public bool ExportBtnEnabled
+        {
+            get => _exportBtnEnabled;
+
+            set
+            {
+                _exportBtnEnabled = value; 
+                
+                OnPropertyChanged();
+            }
+        }
+
         private Visibility _mainGridVisibility;
 
         public Visibility MainGridVisibility
@@ -76,6 +90,8 @@ namespace NCAT.ViewModels
                 _connections = value;
 
                 OnPropertyChanged();
+
+                ExportBtnEnabled = value.Any();
             }
         }
 
@@ -122,6 +138,8 @@ namespace NCAT.ViewModels
         {
             MainGridVisibility = Visibility.Collapsed;
             EmptyGridVisibility = Visibility.Visible;
+
+            ExportBtnEnabled = false;
 
             Connections = new ObservableCollection<NetworkConnectionItem>();
             
