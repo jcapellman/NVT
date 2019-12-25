@@ -97,9 +97,9 @@ namespace NCAT
                 return;
             }
 
-            ViewModel.ExportConnections(ofd.FileName);
+            var response = ViewModel.ExportConnections(ofd.FileName);
 
-            MessageBox.Show($"Exported to {ofd.FileName}");
+            MessageBox.Show(response);
         }
     }
 }

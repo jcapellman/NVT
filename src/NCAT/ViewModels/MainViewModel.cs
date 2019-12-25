@@ -125,11 +125,26 @@ namespace NCAT.ViewModels
 
         private BackgroundWorker _bwConnections;
 
-        public void ExportConnections(string fileName)
+        public string ExportConnections(string fileName)
         {
-            var json = JsonSerializer.Serialize(Connections);
+            if (Connections == null || !Connections.Any())
+            {
+                return "No connections found - aborting export";
+            }
 
-            File.WriteAllText(fileName, json);
+            try
+            {
+                var json = JsonSerializer.Serialize(Connections);
+
+                File.WriteAllText(fileName, json);
+
+                return $"Connections exported to {fileName}";
+            } catch (Exception ex)
+            {
+                Log.Error($"Exception occurred when exporting to {fileName}: {ex}");
+
+                return "An error occurred when exporting the connections - please try again";
+            }
         }
 
         private readonly ConnectionManager connectionManager = new ConnectionManager();
