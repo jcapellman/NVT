@@ -2,9 +2,9 @@
 
 using LiteDB;
 
-using NCAT.lib.Objects;
+using NVT.lib.Objects;
 
-namespace NCAT.lib
+namespace NVT.lib
 {
     public class DB
     {

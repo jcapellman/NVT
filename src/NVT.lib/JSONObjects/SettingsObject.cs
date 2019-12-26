@@ -1,4 +1,4 @@
-﻿namespace NCAT.lib.JSONObjects
+﻿namespace NVT.lib.JSONObjects
 {
     public class SettingsObject
     {

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
-using NCAT.lib.Connections.Base;
-using NCAT.lib.Objects;
+using NVT.lib.Connections.Base;
+using NVT.lib.Objects;
 
-namespace NCAT.lib.Managers
+namespace NVT.lib.Managers
 {
     public class ConnectionManager
     {

@@ -7,11 +7,11 @@ using MahApps.Metro.Controls;
 using Microsoft.Maps.MapControl.WPF;
 using Microsoft.Win32;
 
-using NCAT.ViewModels;
+using NVT.ViewModels;
 
 using NLog;
 
-namespace NCAT
+namespace NVT
 {
     public partial class MainWindow : MetroWindow
     {

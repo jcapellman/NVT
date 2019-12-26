@@ -2,10 +2,10 @@ using System;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using NCAT.lib;
-using NCAT.lib.Objects;
+using NVT.lib;
+using NVT.lib.Objects;
 
-namespace NCAT.UnitTests
+namespace NVT.UnitTests
 {
     [TestClass]
     public class DBTests

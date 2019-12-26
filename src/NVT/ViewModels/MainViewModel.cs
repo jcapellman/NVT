@@ -10,12 +10,12 @@ using System.Windows;
 
 using Microsoft.Maps.MapControl.WPF;
 
-using NCAT.lib.Managers;
-using NCAT.lib.Objects;
+using NVT.lib.Managers;
+using NVT.lib.Objects;
 
 using NLog;
 
-namespace NCAT.ViewModels
+namespace NVT.ViewModels
 {
     public class MainViewModel : INotifyPropertyChanged
     {
@@ -129,7 +129,7 @@ namespace NCAT.ViewModels
         {
             if (Connections == null || !Connections.Any())
             {
-                return NCAT.lib.Resources.AppResources.MainWindowCommand_Export_Message_NoConnections;
+                return NVT.lib.Resources.AppResources.MainWindowCommand_Export_Message_NoConnections;
             }
 
             try
@@ -138,12 +138,12 @@ namespace NCAT.ViewModels
 
                 File.WriteAllText(fileName, json);
 
-                return $"{NCAT.lib.Resources.AppResources.MainWindowCommand_Export_Message_Success} {fileName}";
+                return $"{NVT.lib.Resources.AppResources.MainWindowCommand_Export_Message_Success} {fileName}";
             } catch (Exception ex)
             {
                 Log.Error($"Exception occurred when exporting to {fileName}: {ex}");
 
-                return NCAT.lib.Resources.AppResources.MainWindowCommand_Export_Message_Error;
+                return NVT.lib.Resources.AppResources.MainWindowCommand_Export_Message_Error;
             }
         }
 
@@ -195,10 +195,10 @@ namespace NCAT.ViewModels
 
             if (Connections.Count == 1)
             {
-                CurrentStatus = $"{Connections.Count} {NCAT.lib.Resources.AppResources.MainViewModel_ConnectionStatus_Singular}";
+                CurrentStatus = $"{Connections.Count} {NVT.lib.Resources.AppResources.MainViewModel_ConnectionStatus_Singular}";
             } else
             {
-                CurrentStatus = $"{Connections.Count} {NCAT.lib.Resources.AppResources.MainViewModel_ConnectionStatus_Plural}";
+                CurrentStatus = $"{Connections.Count} {NVT.lib.Resources.AppResources.MainViewModel_ConnectionStatus_Plural}";
             }
 
             _bwConnections.RunWorkerAsync();

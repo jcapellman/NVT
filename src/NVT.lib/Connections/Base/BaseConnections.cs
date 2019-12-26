@@ -7,12 +7,12 @@ using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-using NCAT.lib.JSONObjects;
-using NCAT.lib.Objects;
+using NVT.lib.JSONObjects;
+using NVT.lib.Objects;
 
 using NLog;
 
-namespace NCAT.lib.Connections.Base
+namespace NVT.lib.Connections.Base
 {
     public abstract class BaseConnections
     {

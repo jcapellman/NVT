@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NCAT.lib.Objects
+namespace NVT.lib.Objects
 {
     public class NetworkConnectionItem
     {

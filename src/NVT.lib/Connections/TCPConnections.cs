@@ -1,6 +1,6 @@
-﻿using NCAT.lib.Connections.Base;
+﻿using NVT.lib.Connections.Base;
 
-namespace NCAT.lib.Connections
+namespace NVT.lib.Connections
 {
     public class TCPConnections : BaseConnections
     {

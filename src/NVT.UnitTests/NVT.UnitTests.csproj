@@ -13,8 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\NCAT.lib\NCAT.lib.csproj" />
-    <ProjectReference Include="..\NCAT\NCAT.csproj" />
+    <ProjectReference Include="..\NVT.lib\NVT.lib.csproj" />
+    <ProjectReference Include="..\NVT\NVT.csproj" />
   </ItemGroup>
 
 </Project>

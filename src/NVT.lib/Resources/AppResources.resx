@@ -142,7 +142,7 @@
     <value>Adjust settings</value>
   </data>
   <data name="MainWindow_About" xml:space="preserve">
-    <value>NCAT is a Network Connection Tool to better inform you as the end-user what connections are on your machine</value>
+    <value>NVT is a Network Connection Tool to better inform you as the end-user what connections are on your machine</value>
   </data>
   <data name="MainWindow_AboutHeader" xml:space="preserve">
     <value>About</value>

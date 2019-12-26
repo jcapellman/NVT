@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\NCAT.lib\NCAT.lib.csproj" />
+    <ProjectReference Include="..\NVT.lib\NVT.lib.csproj" />
   </ItemGroup>
 
 </Project>
