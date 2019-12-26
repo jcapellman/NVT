@@ -88,6 +88,15 @@ namespace NVT.lib.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An error occurred when saving.
+        /// </summary>
+        public static string MainViewModel_Settings_SavedUnsuccessfully {
+            get {
+                return ResourceManager.GetString("MainViewModel_Settings_SavedUnsuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to NVT is a Network Connection Tool to better inform you as the end-user what connections are on your machine.
         /// </summary>
         public static string MainWindow_About {

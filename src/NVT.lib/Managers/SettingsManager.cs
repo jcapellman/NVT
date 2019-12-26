@@ -31,9 +31,19 @@ namespace NVT.lib.Managers
             }
         }
 
-        public void WriteFile()
+        public bool WriteFile()
         {
-            File.WriteAllText(SETTINGS_FILENAME, JsonSerializer.Serialize(SettingsObject));
+            try
+            {
+                File.WriteAllText(SETTINGS_FILENAME, JsonSerializer.Serialize(SettingsObject));
+
+                return true;
+            } catch (Exception ex)
+            {
+                Log.Error($"An error occurred when saving {SETTINGS_FILENAME}: {ex}");
+
+                return false;
+            }
         }
 
         private SettingsObject InitializeDefaultSettings()

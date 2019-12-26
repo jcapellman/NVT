@@ -126,9 +126,15 @@ namespace NVT.ViewModels
 
         public string SaveSettings()
         {
-            settingsManager.WriteFile();
+            var result = settingsManager.WriteFile();
 
-            return lib.Resources.AppResources.MainViewModel_Settings_SavedSuccessfully;
+            if (result)
+            {
+                return lib.Resources.AppResources.MainViewModel_Settings_SavedSuccessfully;
+            } else
+            {
+                return lib.Resources.AppResources.MainViewModel_Settings_SavedUnsuccessfully;
+            }
         }
 
         private BackgroundWorker _bwConnections;

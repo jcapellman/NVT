@@ -126,6 +126,9 @@
   <data name="MainViewModel_Settings_SavedSuccessfully" xml:space="preserve">
     <value>Successfully saved the settings</value>
   </data>
+  <data name="MainViewModel_Settings_SavedUnsuccessfully" xml:space="preserve">
+    <value>An error occurred when saving</value>
+  </data>
   <data name="MainWindowCommand_Export_Message_Error" xml:space="preserve">
     <value>An error occurred when exporting the connections - please try again</value>
   </data>
