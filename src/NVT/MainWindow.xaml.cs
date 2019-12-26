@@ -101,5 +101,12 @@ namespace NVT
 
             MessageBox.Show(response);
         }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            var response = ViewModel.SaveSettings();
+
+            MessageBox.Show(response);
+        }
     }
 }

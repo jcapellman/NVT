@@ -124,6 +124,13 @@ namespace NVT.ViewModels
         public List<Location> Locations =>
             Connections.Where(a => a.Latitude.HasValue && a.Longitude.HasValue).Select(a => new Location(a.Latitude.Value, a.Longitude.Value)).ToList();
 
+        public string SaveSettings()
+        {
+            settingsManager.WriteFile();
+
+            return "Saved successfully";
+        }
+
         private BackgroundWorker _bwConnections;
 
         public string ExportConnections(string fileName)
