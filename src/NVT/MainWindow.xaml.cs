@@ -107,6 +107,8 @@ namespace NVT
             var response = ViewModel.SaveSettings();
 
             MessageBox.Show(response);
+
+            btnSettings_Click(null, null);
         }
     }
 }
