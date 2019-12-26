@@ -135,4 +135,7 @@
   <data name="MainWindowCommand_Tooltips_Export" xml:space="preserve">
     <value>Export connections to file</value>
   </data>
+  <data name="MainWindowCommand_Tooltips_Settings" xml:space="preserve">
+    <value>Adjust settings</value>
+  </data>
 </root>

@@ -113,5 +113,14 @@ namespace NCAT.lib.Resources {
                 return ResourceManager.GetString("MainWindowCommand_Tooltips_Export", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Adjust settings.
+        /// </summary>
+        public static string MainWindowCommand_Tooltips_Settings {
+            get {
+                return ResourceManager.GetString("MainWindowCommand_Tooltips_Settings", resourceCulture);
+            }
+        }
     }
 }

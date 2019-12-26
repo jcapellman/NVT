@@ -6,8 +6,9 @@
         xmlns:viewModels="clr-namespace:NCAT.ViewModels"
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:wpf="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
-                 xmlns:iconpacks="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.Material"
-                 mc:Ignorable="d"
+        xmlns:iconpacks="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.Material"
+        mc:Ignorable="d"
+        xmlns:p="clr-namespace:NCAT.lib.Resources;assembly=NCAT.lib"
         ShowIconOnTitleBar="False"
         GlowBrush="Black"
         WindowStartupLocation="CenterScreen"
@@ -21,11 +22,11 @@
 
     <mah:MetroWindow.RightWindowCommands>
         <mah:WindowCommands>
-            <Button VerticalAlignment="Center" Click="btnExport_Click" IsEnabled="{Binding ExportBtnEnabled}" ToolTip="Export Connections to File">
+            <Button VerticalAlignment="Center" Click="btnExport_Click" IsEnabled="{Binding ExportBtnEnabled}" ToolTip="{x:Static p:AppResources.MainWindowCommand_Tooltips_Export}">
                 <iconpacks:PackIconMaterial VerticalAlignment="Center" Kind="Export" />
             </Button>
 
-            <Button VerticalAlignment="Center" Click="btnSettings_Click" ToolTip="Settings">
+            <Button VerticalAlignment="Center" Click="btnSettings_Click" ToolTip="{x:Static p:AppResources.MainWindowCommand_Tooltips_Settings}">
                 <iconpacks:PackIconMaterial VerticalAlignment="Center" Kind="Settings" />
             </Button>
 
