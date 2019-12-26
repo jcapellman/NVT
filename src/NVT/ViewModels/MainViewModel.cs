@@ -128,7 +128,7 @@ namespace NVT.ViewModels
         {
             settingsManager.WriteFile();
 
-            return "Saved successfully";
+            return lib.Resources.AppResources.MainViewModel_Settings_SavedSuccessfully;
         }
 
         private BackgroundWorker _bwConnections;

@@ -79,6 +79,15 @@ namespace NVT.lib.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Successfully saved the settings.
+        /// </summary>
+        public static string MainViewModel_Settings_SavedSuccessfully {
+            get {
+                return ResourceManager.GetString("MainViewModel_Settings_SavedSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to NVT is a Network Connection Tool to better inform you as the end-user what connections are on your machine.
         /// </summary>
         public static string MainWindow_About {
@@ -201,6 +210,51 @@ namespace NVT.lib.Resources {
         public static string MainWindow_NoConnectionsFound {
             get {
                 return ResourceManager.GetString("MainWindow_NoConnectionsFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IP Lookup.
+        /// </summary>
+        public static string MainWindow_Settings_EnableLookup {
+            get {
+                return ResourceManager.GetString("MainWindow_Settings_EnableLookup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable/Disable.
+        /// </summary>
+        public static string MainWindow_Settings_EnableLookup_ToggleText {
+            get {
+                return ResourceManager.GetString("MainWindow_Settings_EnableLookup_ToggleText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IP Lookup Service URL.
+        /// </summary>
+        public static string MainWindow_Settings_LookupURL {
+            get {
+                return ResourceManager.GetString("MainWindow_Settings_LookupURL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string MainWindow_Settings_SaveButton_Label {
+            get {
+                return ResourceManager.GetString("MainWindow_Settings_SaveButton_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scannable Connection Types.
+        /// </summary>
+        public static string MainWindow_Settings_ScannableConnectionTypes {
+            get {
+                return ResourceManager.GetString("MainWindow_Settings_ScannableConnectionTypes", resourceCulture);
             }
         }
         

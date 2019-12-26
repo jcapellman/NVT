@@ -123,6 +123,9 @@
   <data name="MainViewModel_ConnectionStatus_Singular" xml:space="preserve">
     <value>connection found</value>
   </data>
+  <data name="MainViewModel_Settings_SavedSuccessfully" xml:space="preserve">
+    <value>Successfully saved the settings</value>
+  </data>
   <data name="MainWindowCommand_Export_Message_Error" xml:space="preserve">
     <value>An error occurred when exporting the connections - please try again</value>
   </data>
@@ -185,5 +188,20 @@
   </data>
   <data name="MainWindow_SettingsHeader" xml:space="preserve">
     <value>Settings</value>
+  </data>
+  <data name="MainWindow_Settings_EnableLookup" xml:space="preserve">
+    <value>IP Lookup</value>
+  </data>
+  <data name="MainWindow_Settings_EnableLookup_ToggleText" xml:space="preserve">
+    <value>Enable/Disable</value>
+  </data>
+  <data name="MainWindow_Settings_LookupURL" xml:space="preserve">
+    <value>IP Lookup Service URL</value>
+  </data>
+  <data name="MainWindow_Settings_SaveButton_Label" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="MainWindow_Settings_ScannableConnectionTypes" xml:space="preserve">
+    <value>Scannable Connection Types</value>
   </data>
 </root>
