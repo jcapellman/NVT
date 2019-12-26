@@ -31,7 +31,7 @@ namespace NVT.lib.Connections.Base
 
         public abstract string ConnectionType { get; }
 
-        public async Task<List<NetworkConnectionItem>> GetConnectionsAsync()
+        public async Task<List<NetworkConnectionItem>> GetConnectionsAsync(SettingsObject settings)
         {
             var processes = Process.GetProcesses();
 
@@ -121,7 +121,10 @@ namespace NVT.lib.Connections.Base
                             ConnectionType = ConnectionType
                         };
 
-                        item = await GetReverseLookupAsync(item);
+                        if (settings.EnableIPLookup)
+                        {
+                            item = await GetReverseLookupAsync(item);
+                        }
                     }
                     else
                     {

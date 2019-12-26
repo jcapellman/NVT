@@ -201,7 +201,7 @@ namespace NVT.ViewModels
 
         private async void _bwConnections_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            var newConnections = await connectionManager.GetConnectionsAsync(connectionManager.SupportedConnectionTypes);
+            var newConnections = await connectionManager.GetConnectionsAsync(settingsManager.SettingsObject);
 
             Log.Debug($"Received {newConnections.Count} connections");
 

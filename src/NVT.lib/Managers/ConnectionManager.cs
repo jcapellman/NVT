@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using NVT.lib.Connections.Base;
 using NVT.lib.Objects;
+using NVT.lib.JSONObjects;
 
 namespace NVT.lib.Managers
 {
@@ -25,13 +26,13 @@ namespace NVT.lib.Managers
 
         public string[] SupportedConnectionTypes => _connections.Select(a => a.ConnectionType).ToArray();
 
-        public async Task<List<NetworkConnectionItem>> GetConnectionsAsync(string[] supportedTypes)
+        public async Task<List<NetworkConnectionItem>> GetConnectionsAsync(SettingsObject settings)
         {
             var networkConnections = new List<NetworkConnectionItem>();
 
-            foreach (var connection in _connections.Where(a => supportedTypes.Contains(a.ConnectionType)))
+            foreach (var connection in _connections.Where(a => settings.EnabledConnectionTypes.Contains(a.ConnectionType)))
             {
-                var connections = await connection.GetConnectionsAsync();
+                var connections = await connection.GetConnectionsAsync(settings);
 
                 networkConnections.AddRange(connections);
             }
