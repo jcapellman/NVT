@@ -117,7 +117,7 @@ namespace NVT.ViewModels
 
                 MapVisibility = Locations.Any() ? Visibility.Visible : Visibility.Collapsed;
 
-                ExportBtnEnabled = value.Any();
+                ExportBtnEnabled = Locations.Any();
             }
         }
 
