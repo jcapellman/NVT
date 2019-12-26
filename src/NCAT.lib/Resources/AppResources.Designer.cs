@@ -79,6 +79,141 @@ namespace NCAT.lib.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to NCAT is a Network Connection Tool to better inform you as the end-user what connections are on your machine.
+        /// </summary>
+        public static string MainWindow_About {
+            get {
+                return ResourceManager.GetString("MainWindow_About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        public static string MainWindow_AboutHeader {
+            get {
+                return ResourceManager.GetString("MainWindow_AboutHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (actively querying).
+        /// </summary>
+        public static string MainWindow_ActivelyQuerying {
+            get {
+                return ResourceManager.GetString("MainWindow_ActivelyQuerying", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Actions.
+        /// </summary>
+        public static string MainWindow_Grid_Header_Actions {
+            get {
+                return ResourceManager.GetString("MainWindow_Grid_Header_Actions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to City.
+        /// </summary>
+        public static string MainWindow_Grid_Header_City {
+            get {
+                return ResourceManager.GetString("MainWindow_Grid_Header_City", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Country.
+        /// </summary>
+        public static string MainWindow_Grid_Header_Country {
+            get {
+                return ResourceManager.GetString("MainWindow_Grid_Header_Country", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Detection.
+        /// </summary>
+        public static string MainWindow_Grid_Header_Detection {
+            get {
+                return ResourceManager.GetString("MainWindow_Grid_Header_Detection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IP Address.
+        /// </summary>
+        public static string MainWindow_Grid_Header_IPAddress {
+            get {
+                return ResourceManager.GetString("MainWindow_Grid_Header_IPAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ISP.
+        /// </summary>
+        public static string MainWindow_Grid_Header_ISP {
+            get {
+                return ResourceManager.GetString("MainWindow_Grid_Header_ISP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Port.
+        /// </summary>
+        public static string MainWindow_Grid_Header_Port {
+            get {
+                return ResourceManager.GetString("MainWindow_Grid_Header_Port", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Process File Name.
+        /// </summary>
+        public static string MainWindow_Grid_Header_ProcessFileName {
+            get {
+                return ResourceManager.GetString("MainWindow_Grid_Header_ProcessFileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type.
+        /// </summary>
+        public static string MainWindow_Grid_Header_Type {
+            get {
+                return ResourceManager.GetString("MainWindow_Grid_Header_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Network Connections.
+        /// </summary>
+        public static string MainWindow_Grid_Tooltip {
+            get {
+                return ResourceManager.GetString("MainWindow_Grid_Tooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No current TCP Connections found.
+        /// </summary>
+        public static string MainWindow_NoConnectionsFound {
+            get {
+                return ResourceManager.GetString("MainWindow_NoConnectionsFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string MainWindow_SettingsHeader {
+            get {
+                return ResourceManager.GetString("MainWindow_SettingsHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An error occurred when exporting the connections - please try again.
         /// </summary>
         public static string MainWindowCommand_Export_Message_Error {
@@ -102,6 +237,15 @@ namespace NCAT.lib.Resources {
         public static string MainWindowCommand_Export_Message_Success {
             get {
                 return ResourceManager.GetString("MainWindowCommand_Export_Message_Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        public static string MainWindowCommand_Tooltips_About {
+            get {
+                return ResourceManager.GetString("MainWindowCommand_Tooltips_About", resourceCulture);
             }
         }
         

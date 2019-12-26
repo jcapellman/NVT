@@ -30,7 +30,7 @@
                 <iconpacks:PackIconMaterial VerticalAlignment="Center" Kind="Settings" />
             </Button>
 
-            <Button Click="btnAbout_Click" ToolTip="About">
+            <Button Click="btnAbout_Click" ToolTip="{x:Static p:AppResources.MainWindowCommand_Tooltips_About}">
                 <iconpacks:PackIconMaterial VerticalAlignment="Center" Kind="Help" />
             </Button>
         </mah:WindowCommands>
@@ -41,36 +41,30 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <mah:Flyout x:Name="foAbout" Header="About" Position="Right" Width="250">
+        <mah:Flyout x:Name="foAbout" Header="{x:Static p:AppResources.MainWindow_AboutHeader}" Position="Right" Width="250">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" TextWrapping="Wrap" Text="NCAT is a Network Connection Tool to better inform you as the end-user what connections are on your machine" />
+                <TextBlock Grid.Row="0" TextWrapping="Wrap" Text="{x:Static p:AppResources.MainWindow_About}" />
 
                 <TextBlock Grid.Row="1" Text="https://github.com/jcapellman/NCAT/" />
             </Grid>
         </mah:Flyout>
         
-        <mah:Flyout x:Name="foSettings" Header="Settings" Position="Right" Width="400">
+        <mah:Flyout x:Name="foSettings" Header="{x:Static p:AppResources.MainWindow_SettingsHeader}" Position="Right" Width="400">
             <Grid>
-                <Button>
-                    <StackPanel Orientation="Vertical">
-                        <iconpacks:PackIconMaterial Kind="ContentSave" />
-                        <Label Content="save" />
-                    </StackPanel>
-                </Button>
             </Grid>
         </mah:Flyout>
 
         <Grid Grid.Row="0" Visibility="{Binding EmptyGridVisibility, Mode=TwoWay}">
             <Label VerticalAlignment="Center" HorizontalAlignment="Center">
                 <StackPanel Orientation="Vertical">
-                    <Label Content="No current TCP Connections found" FontSize="24" />
+                    <Label Content="{x:Static p:AppResources.MainWindow_NoConnectionsFound}" FontSize="24" />
                     <mah:MetroProgressBar IsIndeterminate="True" />
-                    <Label Content="(actively querying)" HorizontalAlignment="Center" FontSize="12" />
+                    <Label Content="{x:Static p:AppResources.MainWindow_ActivelyQuerying}" HorizontalAlignment="Center" FontSize="12" />
                 </StackPanel>
             </Label>
         </Grid>
@@ -86,16 +80,16 @@
 
             <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding Connections}">
                 <ListView.View>
-                    <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Network Connection">
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=DetectedTime}" Header="Detection" Width="150" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=ConnectionType}" Header="Type" Width="50" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=IPAddress}" Header="IP Address" Width="100"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=Port}" Header="Port" Width="75" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=City}" Header="City" Width="150" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=Country}" Header="Country" Width="150" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=ISP}" Header="ISP" Width="150" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=ProcessFileName}" Header="Process File Name" Width="350" />
-                        <GridViewColumn Header="Actions" Width="100" />
+                    <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="{x:Static p:AppResources.MainWindow_Grid_Tooltip}">
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=DetectedTime}" Header="{x:Static p:AppResources.MainWindow_Grid_Header_Detection}" Width="150" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=ConnectionType}" Header="{x:Static p:AppResources.MainWindow_Grid_Header_Type}" Width="50" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=IPAddress}" Header="{x:Static p:AppResources.MainWindow_Grid_Header_IPAddress}" Width="100"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Port}" Header="{x:Static p:AppResources.MainWindow_Grid_Header_Port}" Width="75" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=City}" Header="{x:Static p:AppResources.MainWindow_Grid_Header_City}" Width="150" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=Country}" Header="{x:Static p:AppResources.MainWindow_Grid_Header_Country}" Width="150" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=ISP}" Header="{x:Static p:AppResources.MainWindow_Grid_Header_ISP}" Width="150" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=ProcessFileName}" Header="{x:Static p:AppResources.MainWindow_Grid_Header_ProcessFileName}" Width="350" />
+                        <GridViewColumn Header="{x:Static p:AppResources.MainWindow_Grid_Header_Actions}" Width="100" />
                     </GridView>
                 </ListView.View>
 
