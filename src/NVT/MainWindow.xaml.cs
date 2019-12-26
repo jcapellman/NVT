@@ -92,7 +92,7 @@ namespace NVT
 
             var result = ofd.ShowDialog();
 
-            if (!result.HasValue)
+            if (!result.HasValue || !result.Value)
             {
                 return;
             }
