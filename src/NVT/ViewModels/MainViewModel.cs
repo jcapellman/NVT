@@ -14,6 +14,7 @@ using NVT.lib.Managers;
 using NVT.lib.Objects;
 
 using NLog;
+using NVT.lib.JSONObjects;
 
 namespace NVT.ViewModels
 {
@@ -148,6 +149,22 @@ namespace NVT.ViewModels
         }
 
         private readonly ConnectionManager connectionManager = new ConnectionManager();
+
+        private readonly SettingsManager settingsManager = new SettingsManager();
+
+        public SettingsObject SettingsObject
+        {
+            get => settingsManager.SettingsObject;
+
+            set
+            {
+                settingsManager.SettingsObject = value;
+
+                settingsManager.WriteFile();
+
+                OnPropertyChanged();
+            }
+        }
 
         public MainViewModel()
         {
