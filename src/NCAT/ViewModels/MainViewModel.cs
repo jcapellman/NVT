@@ -193,7 +193,13 @@ namespace NCAT.ViewModels
 
             OnNewConnections?.Invoke(null, null);
 
-            CurrentStatus = $"{Connections.Count} connection(s) found";
+            if (Connections.Count == 1)
+            {
+                CurrentStatus = $"{Connections.Count} {NCAT.lib.Resources.AppResources.MainViewModel_ConnectionStatus_Singular}";
+            } else
+            {
+                CurrentStatus = $"{Connections.Count} {NCAT.lib.Resources.AppResources.MainViewModel_ConnectionStatus_Plural}";
+            }
 
             _bwConnections.RunWorkerAsync();
         }

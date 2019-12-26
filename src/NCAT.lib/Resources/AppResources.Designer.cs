@@ -61,6 +61,24 @@ namespace NCAT.lib.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to connections found.
+        /// </summary>
+        public static string MainViewModel_ConnectionStatus_Plural {
+            get {
+                return ResourceManager.GetString("MainViewModel_ConnectionStatus_Plural", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to connection found.
+        /// </summary>
+        public static string MainViewModel_ConnectionStatus_Singular {
+            get {
+                return ResourceManager.GetString("MainViewModel_ConnectionStatus_Singular", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An error occurred when exporting the connections - please try again.
         /// </summary>
         public static string MainWindowCommand_Export_Message_Error {
