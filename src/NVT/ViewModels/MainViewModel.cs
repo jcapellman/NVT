@@ -90,8 +90,6 @@ namespace NVT.ViewModels
                 _connections = value;
 
                 OnPropertyChanged();
-
-                ExportBtnEnabled = value.Any();
             }
         }
 
@@ -117,6 +115,8 @@ namespace NVT.ViewModels
                 }
 
                 MapVisibility = Locations.Any() ? Visibility.Visible : Visibility.Collapsed;
+
+                ExportBtnEnabled = value.Any();
             }
         }
 
