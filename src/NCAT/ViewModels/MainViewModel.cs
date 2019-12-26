@@ -129,7 +129,7 @@ namespace NCAT.ViewModels
         {
             if (Connections == null || !Connections.Any())
             {
-                return "No connections found - aborting export";
+                return NCAT.lib.Resources.AppResources.MainWindowCommand_Export_Message_NoConnections;
             }
 
             try
@@ -138,12 +138,12 @@ namespace NCAT.ViewModels
 
                 File.WriteAllText(fileName, json);
 
-                return $"Connections exported to {fileName}";
+                return $"{NCAT.lib.Resources.AppResources.MainWindowCommand_Export_Message_Success} {fileName}";
             } catch (Exception ex)
             {
                 Log.Error($"Exception occurred when exporting to {fileName}: {ex}");
 
-                return "An error occurred when exporting the connections - please try again";
+                return NCAT.lib.Resources.AppResources.MainWindowCommand_Export_Message_Error;
             }
         }
 
