@@ -173,8 +173,6 @@ namespace NVT.ViewModels
             {
                 settingsManager.SettingsObject = value;
 
-                settingsManager.WriteFile();
-
                 OnPropertyChanged();
             }
         }
