@@ -124,6 +124,15 @@ namespace NVT.lib.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to IP Address copied to clipboard.
+        /// </summary>
+        public static string MainWindow_Copy_IPAddress {
+            get {
+                return ResourceManager.GetString("MainWindow_Copy_IPAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Actions.
         /// </summary>
         public static string MainWindow_Grid_Header_Actions {

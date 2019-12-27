@@ -118,5 +118,12 @@ namespace NVT
 
             MessageBox.Show(response);
         }
+
+        private void btnCopy_Click(object sender, RoutedEventArgs e)
+        {
+            Clipboard.SetText(((NetworkConnectionItem)((Button)sender).DataContext).IPAddress);
+
+            MessageBox.Show(lib.Resources.AppResources.MainWindow_Copy_IPAddress);
+        }
     }
 }

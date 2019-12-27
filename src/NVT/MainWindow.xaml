@@ -120,7 +120,7 @@
                                             <iconpacks:PackIconMaterial Kind="Stop" />
                                         </Button>
 
-                                        <Button Grid.Column="1">
+                                        <Button Grid.Column="1" Click="btnCopy_Click">
                                             <iconpacks:PackIconMaterial Kind="ContentCopy" />
                                         </Button>
                                     </Grid>
@@ -165,7 +165,7 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <Grid Grid.Row="2" Background="#1e1e1e" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,5,0,0">
+            <Grid Grid.Row="2" Background="#1e1e1e" Grid.Column="0" Margin="0,5,0,0">
                 <Label Content="{Binding CurrentStatus}" />
             </Grid>
         </Grid>
