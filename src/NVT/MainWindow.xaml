@@ -115,7 +115,7 @@
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
 
-                                        <Button Grid.Column="0">
+                                        <Button Grid.Column="0" Click="btnStopProcess_Click">
                                             <iconpacks:PackIconMaterial Kind="Stop" />
                                         </Button>
 

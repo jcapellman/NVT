@@ -26,6 +26,8 @@ namespace NVT.lib.Objects
 
         public string ProcessName { get; set; }
 
+        public int ProcessId { get; set; }
+
         public string ProcessFileName { get; set; }
     }
 }

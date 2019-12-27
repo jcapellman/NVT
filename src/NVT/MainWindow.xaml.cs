@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
-
+using System.Windows.Controls;
 using MahApps.Metro.Controls;
 
 using Microsoft.Maps.MapControl.WPF;
@@ -10,6 +10,7 @@ using Microsoft.Win32;
 using NVT.ViewModels;
 
 using NLog;
+using NVT.lib.Objects;
 
 namespace NVT
 {
@@ -109,6 +110,11 @@ namespace NVT
             MessageBox.Show(response);
 
             btnSettings_Click(null, null);
+        }
+
+        private void btnStopProcess_Click(object sender, RoutedEventArgs e)
+        {
+            var response = ViewModel.StopProcess((NetworkConnectionItem)((Button) sender).DataContext);
         }
     }
 }

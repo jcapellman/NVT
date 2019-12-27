@@ -88,12 +88,15 @@ namespace NVT.lib.Connections.Base
 
                     var processName = UNKNOWN;
                     var processFileName = UNKNOWN;
+                    var processId = 0;
 
                     var matchedProcess = processes.FirstOrDefault(a => a.Id == pid);
 
                     if (matchedProcess != null)
                     {
                         processName = matchedProcess.ProcessName;
+
+                        processId = matchedProcess.Id;
 
                         try
                         {
@@ -118,7 +121,8 @@ namespace NVT.lib.Connections.Base
                             ISP = UNKNOWN,
                             Country = UNKNOWN,
                             City = UNKNOWN,
-                            ConnectionType = ConnectionType
+                            ConnectionType = ConnectionType,
+                            ProcessId = processId
                         };
 
                         if (settings.EnableIPLookup)
@@ -132,6 +136,7 @@ namespace NVT.lib.Connections.Base
                         item.ProcessName = processName;
                         item.ProcessFileName = processFileName;
                         item.ConnectionType = ConnectionType;
+                        item.ProcessId = processId;
                     }
 
                     activeConnections.Add(item);
