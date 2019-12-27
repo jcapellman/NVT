@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+
 using MahApps.Metro.Controls;
 
 using Microsoft.Maps.MapControl.WPF;
