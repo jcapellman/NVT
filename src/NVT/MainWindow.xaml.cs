@@ -12,6 +12,7 @@ using NVT.ViewModels;
 using NVT.lib.Objects;
 
 using NLog;
+using NVT.Extensions;
 
 namespace NVT
 {
@@ -74,11 +75,21 @@ namespace NVT
         private void btnSettings_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             foSettings.IsOpen = !foSettings.IsOpen;
+
+            if (foSettings.IsOpen)
+            {
+                foSettings.BringToFront();
+            }
         }
 
         private void btnAbout_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             foAbout.IsOpen = !foAbout.IsOpen;
+
+            if (foAbout.IsOpen)
+            {
+                foAbout.BringToFront();
+            }
         }
 
         private void btnExport_Click(object sender, System.Windows.RoutedEventArgs e)
