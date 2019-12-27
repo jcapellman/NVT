@@ -12,7 +12,7 @@ namespace NVT.lib.Managers
 {
     public class ConnectionManager
     {
-        private List<BaseConnections> _connections = new List<BaseConnections>();
+        private readonly List<BaseConnections> _connections = new List<BaseConnections>();
 
         public ConnectionManager()
         {

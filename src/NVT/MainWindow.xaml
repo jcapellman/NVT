@@ -101,11 +101,31 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <wpf:Map Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Visibility="{Binding MapVisibility}" x:Name="bmMap" CredentialsProvider="AofM3Qx9ySMc6cYJ5iSz0UI_gs1vgdzRgWSmGqIvYvf3W36A2cJQvrAK99AMhOYM" ZoomLevel="12" />
+            <wpf:Map Grid.Row="0" Grid.Column="0" Visibility="{Binding MapVisibility}" x:Name="bmMap" CredentialsProvider="AofM3Qx9ySMc6cYJ5iSz0UI_gs1vgdzRgWSmGqIvYvf3W36A2cJQvrAK99AMhOYM" ZoomLevel="12" />
 
-            <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding Connections}">
+            <ListView Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Connections}">
                 <ListView.View>
                     <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="{x:Static p:AppResources.MainWindow_Grid_Tooltip}">
+                        <GridViewColumn Header="{x:Static p:AppResources.MainWindow_Grid_Header_Actions}" Width="75">
+                            <GridViewColumn.CellTemplate>
+                                <ItemContainerTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Button Grid.Column="0">
+                                            <iconpacks:PackIconMaterial Kind="Stop" />
+                                        </Button>
+
+                                        <Button Grid.Column="1">
+                                            <iconpacks:PackIconMaterial Kind="ContentCopy" />
+                                        </Button>
+                                    </Grid>
+                                </ItemContainerTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                         <GridViewColumn DisplayMemberBinding="{Binding Path=DetectedTime}" Header="{x:Static p:AppResources.MainWindow_Grid_Header_Detection}" Width="150" />
                         <GridViewColumn DisplayMemberBinding="{Binding Path=ConnectionType}" Header="{x:Static p:AppResources.MainWindow_Grid_Header_Type}" Width="50" />
                         <GridViewColumn DisplayMemberBinding="{Binding Path=IPAddress}" Header="{x:Static p:AppResources.MainWindow_Grid_Header_IPAddress}" Width="100"/>
@@ -113,8 +133,7 @@
                         <GridViewColumn DisplayMemberBinding="{Binding Path=City}" Header="{x:Static p:AppResources.MainWindow_Grid_Header_City}" Width="150" />
                         <GridViewColumn DisplayMemberBinding="{Binding Path=Country}" Header="{x:Static p:AppResources.MainWindow_Grid_Header_Country}" Width="150" />
                         <GridViewColumn DisplayMemberBinding="{Binding Path=ISP}" Header="{x:Static p:AppResources.MainWindow_Grid_Header_ISP}" Width="150" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=ProcessFileName}" Header="{x:Static p:AppResources.MainWindow_Grid_Header_ProcessFileName}" Width="350" />
-                        <GridViewColumn Header="{x:Static p:AppResources.MainWindow_Grid_Header_Actions}" Width="100" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=ProcessFileName}" Header="{x:Static p:AppResources.MainWindow_Grid_Header_ProcessFileName}" Width="475" />
                     </GridView>
                 </ListView.View>
 
@@ -132,20 +151,14 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
-                            <Label Grid.Column="0" Content="{Binding DetectedTime}" />
-                            <Label Grid.Column="1" Content="{Binding ConnectionType}" />
-                            <Label Grid.Column="2" Content="{Binding IPAddress}" />
-                            <Label Grid.Column="3" Content="{Binding Port}" />
-                            <Label Grid.Column="4" Content="{Binding City}" />
-                            <Label Grid.Column="5" Content="{Binding Country}" />
-                            <Label Grid.Column="6" Content="{Binding ISP}" />
-                            <Label Grid.Column="7" Content="{Binding ProcessFileName}" />
-
-                            <Grid Grid.Column="8">
-                                <Button>
-                                    <iconpacks:PackIconMaterial Kind="Stop" />
-                                </Button>
-                            </Grid>
+                            <Label Grid.Column="0" Content="{Binding DetectedTime}" ToolTip="{Binding DetectedTime}" />
+                            <Label Grid.Column="1" Content="{Binding ConnectionType}" ToolTip="{Binding ConnectionType}" />
+                            <Label Grid.Column="2" Content="{Binding IPAddress}" ToolTip="{Binding IPAddress}" />
+                            <Label Grid.Column="3" Content="{Binding Port}" ToolTip="{Binding Port}" />
+                            <Label Grid.Column="4" Content="{Binding City}" ToolTip="{Binding City}" />
+                            <Label Grid.Column="5" Content="{Binding Country}" ToolTip="{Binding Country}" />
+                            <Label Grid.Column="6" Content="{Binding ISP}" ToolTip="{Binding ISP}" />
+                            <Label Grid.Column="7" Content="{Binding ProcessFileName}" ToolTip="{Binding ProcessFileName}" />
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>

@@ -221,13 +221,9 @@ namespace NVT.ViewModels
 
             OnNewConnections?.Invoke(null, null);
 
-            if (Connections.Count == 1)
-            {
-                CurrentStatus = $"{Connections.Count} {NVT.lib.Resources.AppResources.MainViewModel_ConnectionStatus_Singular}";
-            } else
-            {
-                CurrentStatus = $"{Connections.Count} {NVT.lib.Resources.AppResources.MainViewModel_ConnectionStatus_Plural}";
-            }
+            CurrentStatus = Connections.Count == 1 ? 
+                $"{Connections.Count} {NVT.lib.Resources.AppResources.MainViewModel_ConnectionStatus_Singular}" : 
+                $"{Connections.Count} {NVT.lib.Resources.AppResources.MainViewModel_ConnectionStatus_Plural}";
 
             _bwConnections.RunWorkerAsync();
         }

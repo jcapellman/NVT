@@ -38,7 +38,7 @@ namespace NVT
 
                 return;
             }
-
+            /*
             foreach (var item in ViewModel.Connections.Where(a => a.Latitude.HasValue && a.Longitude.HasValue))
             {
                 bmMap.Children.Add(new Pushpin
@@ -66,7 +66,7 @@ namespace NVT
             } catch (Exception ex)
             {
                 Log.Error($"Exception when setting the view: {ex}");
-            }
+            }*/
         }
 
         private void btnSettings_Click(object sender, System.Windows.RoutedEventArgs e)
