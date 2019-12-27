@@ -8,9 +8,9 @@ using Microsoft.Maps.MapControl.WPF;
 using Microsoft.Win32;
 
 using NVT.ViewModels;
+using NVT.lib.Objects;
 
 using NLog;
-using NVT.lib.Objects;
 
 namespace NVT
 {
@@ -39,7 +39,7 @@ namespace NVT
 
                 return;
             }
-            /*
+            
             foreach (var item in ViewModel.Connections.Where(a => a.Latitude.HasValue && a.Longitude.HasValue))
             {
                 bmMap.Children.Add(new Pushpin
@@ -67,7 +67,7 @@ namespace NVT
             } catch (Exception ex)
             {
                 Log.Error($"Exception when setting the view: {ex}");
-            }*/
+            }
         }
 
         private void btnSettings_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -115,6 +115,8 @@ namespace NVT
         private void btnStopProcess_Click(object sender, RoutedEventArgs e)
         {
             var response = ViewModel.StopProcess((NetworkConnectionItem)((Button) sender).DataContext);
+
+            MessageBox.Show(response);
         }
     }
 }

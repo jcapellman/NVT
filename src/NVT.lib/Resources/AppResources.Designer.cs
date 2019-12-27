@@ -329,5 +329,23 @@ namespace NVT.lib.Resources {
                 return ResourceManager.GetString("MainWindowCommand_Tooltips_Settings", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to kill process.
+        /// </summary>
+        public static string ProcessManager_KillProcess_Failure {
+            get {
+                return ResourceManager.GetString("ProcessManager_KillProcess_Failure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Successfully killed process.
+        /// </summary>
+        public static string ProcessManager_KillProcess_Success {
+            get {
+                return ResourceManager.GetString("ProcessManager_KillProcess_Success", resourceCulture);
+            }
+        }
     }
 }

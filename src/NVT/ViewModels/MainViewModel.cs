@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -11,11 +10,11 @@ using System.Windows;
 
 using Microsoft.Maps.MapControl.WPF;
 
+using NVT.lib.JSONObjects;
 using NVT.lib.Managers;
 using NVT.lib.Objects;
 
 using NLog;
-using NVT.lib.JSONObjects;
 
 namespace NVT.ViewModels
 {
@@ -95,15 +94,15 @@ namespace NVT.ViewModels
             }
         }
 
-        private string _currenStatus;
+        private string _currentStatus;
 
         public string CurrentStatus
         {
-            get => _currenStatus;
+            get => _currentStatus;
 
             set
             {
-                _currenStatus = value;
+                _currentStatus = value;
                 OnPropertyChanged();
 
                 if (Connections.Any())
@@ -129,13 +128,7 @@ namespace NVT.ViewModels
         {
             var result = settingsManager.WriteFile();
 
-            if (result)
-            {
-                return lib.Resources.AppResources.MainViewModel_Settings_SavedSuccessfully;
-            } else
-            {
-                return lib.Resources.AppResources.MainViewModel_Settings_SavedUnsuccessfully;
-            }
+            return result ? lib.Resources.AppResources.MainViewModel_Settings_SavedSuccessfully : lib.Resources.AppResources.MainViewModel_Settings_SavedUnsuccessfully;
         }
 
         private BackgroundWorker _bwConnections;
@@ -236,22 +229,6 @@ namespace NVT.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public string StopProcess(NetworkConnectionItem networkConnectionItem)
-        {
-            try
-            {
-                var process = Process.GetProcessById(networkConnectionItem.ProcessId);
-
-                process.Kill();
-
-                return string.Empty;
-            }
-            catch (Exception ex)
-            {
-                Log.Error($"Exception when attempting to kill process: {ex}");
-                
-                return null;
-            }
-        }
+        public string StopProcess(NetworkConnectionItem networkConnectionItem) => ProcessManager.KillProcess(networkConnectionItem.ProcessId);
     }
 }

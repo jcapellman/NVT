@@ -207,4 +207,10 @@
   <data name="MainWindow_Settings_ScannableConnectionTypes" xml:space="preserve">
     <value>Scannable Connection Types</value>
   </data>
+  <data name="ProcessManager_KillProcess_Failure" xml:space="preserve">
+    <value>Failed to kill process</value>
+  </data>
+  <data name="ProcessManager_KillProcess_Success" xml:space="preserve">
+    <value>Successfully killed process</value>
+  </data>
 </root>
