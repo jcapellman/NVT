@@ -23,12 +23,14 @@ namespace NVT.lib.Managers
                 SettingsObject = LoadFile(SETTINGS_FILENAME);
             }
 
-            if (SettingsObject == null)
+            if (SettingsObject != null)
             {
-                SettingsObject = InitializeDefaultSettings();
-
-                WriteFile();
+                return;
             }
+
+            SettingsObject = InitializeDefaultSettings();
+
+            WriteFile();
         }
 
         public bool WriteFile()
@@ -38,7 +40,8 @@ namespace NVT.lib.Managers
                 File.WriteAllText(SETTINGS_FILENAME, JsonSerializer.Serialize(SettingsObject));
 
                 return true;
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 Log.Error($"An error occurred when saving {SETTINGS_FILENAME}: {ex}");
 
