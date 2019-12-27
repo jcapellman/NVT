@@ -9,10 +9,11 @@
         xmlns:iconpacks="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.Material"
         mc:Ignorable="d"
         xmlns:p="clr-namespace:NVT.lib.Resources;assembly=NVT.lib"
-        ShowIconOnTitleBar="False"
+        ShowIconOnTitleBar="True"
         GlowBrush="Black"
         WindowStartupLocation="CenterScreen"
         ShowMinButton="True"
+        Icon="/NVT;component/app.ico"
         ShowMaxRestoreButton="True"
         WindowButtonCommandsOverlayBehavior="Always"
         Title="NVT" ResizeMode="CanResize" MinHeight="720" MinWidth="1280">
