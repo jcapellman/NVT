@@ -106,6 +106,15 @@ namespace NVT.lib.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to View Log.
+        /// </summary>
+        public static string MainWindow_About_ViewLogButton {
+            get {
+                return ResourceManager.GetString("MainWindow_About_ViewLogButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to About.
         /// </summary>
         public static string MainWindow_AboutHeader {
@@ -219,6 +228,15 @@ namespace NVT.lib.Resources {
         public static string MainWindow_Grid_Tooltip {
             get {
                 return ResourceManager.GetString("MainWindow_Grid_Tooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not find log file to open.
+        /// </summary>
+        public static string MainWindow_LogFileNotFound {
+            get {
+                return ResourceManager.GetString("MainWindow_LogFileNotFound", resourceCulture);
             }
         }
         

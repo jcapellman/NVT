@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -136,6 +138,20 @@ namespace NVT
             Clipboard.SetText(((NetworkConnectionItem)((Button)sender).DataContext).IPAddress);
 
             MessageBox.Show(lib.Resources.AppResources.MainWindow_Copy_IPAddress);
+        }
+
+        private void btnViewLog_Click(object sender, RoutedEventArgs e)
+        {
+            var fullPath = Path.Combine(AppContext.BaseDirectory, lib.Common.Constants.LOG_FILENAME);
+
+            if (!File.Exists(fullPath))
+            {
+                MessageBox.Show($"{lib.Resources.AppResources.MainWindow_LogFileNotFound} ({lib.Common.Constants.LOG_FILENAME})");
+
+                return;
+            }
+
+            Process.Start(fullPath);
         }
     }
 }

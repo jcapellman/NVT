@@ -153,6 +153,9 @@
   <data name="MainWindow_AboutHeader" xml:space="preserve">
     <value>About</value>
   </data>
+  <data name="MainWindow_About_ViewLogButton" xml:space="preserve">
+    <value>View Log</value>
+  </data>
   <data name="MainWindow_ActivelyQuerying" xml:space="preserve">
     <value>(actively querying)</value>
   </data>
@@ -188,6 +191,9 @@
   </data>
   <data name="MainWindow_Grid_Tooltip" xml:space="preserve">
     <value>Network Connections</value>
+  </data>
+  <data name="MainWindow_LogFileNotFound" xml:space="preserve">
+    <value>Could not find log file to open</value>
   </data>
   <data name="MainWindow_NoConnectionsFound" xml:space="preserve">
     <value>No current TCP Connections found</value>

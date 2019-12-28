@@ -47,11 +47,19 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
                 <TextBlock Grid.Row="0" TextWrapping="Wrap" Text="{x:Static p:AppResources.MainWindow_About}" />
 
                 <TextBlock Grid.Row="1" Text="https://github.com/jcapellman/NCAT/" />
+
+                <Button Grid.Row="2" HorizontalAlignment="Center" Margin="0,0,0,10" VerticalAlignment="Bottom" Click="btnViewLog_Click">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                        <iconpacks:PackIconMaterial Kind="ViewModule" HorizontalAlignment="Center" />
+                        <TextBlock Text="{x:Static p:AppResources.MainWindow_About_ViewLogButton}" HorizontalAlignment="Center" />
+                    </StackPanel>
+                </Button>
             </Grid>
         </mah:Flyout>
         
