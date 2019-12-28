@@ -1,10 +1,12 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 
 using NVT.lib.JSONObjects;
 
 using NLog;
+using NVT.lib.Common;
 
 namespace NVT.lib.Managers
 {
@@ -55,7 +57,8 @@ namespace NVT.lib.Managers
             {
                 EnabledConnectionTypes = new ConnectionManager().SupportedConnectionTypes,
                 EnableIPLookup = true,
-                IPLookupURL = string.Empty
+                IPLookupURL = string.Empty,
+                LogLevel = Constants.LOG_LEVELS.Last()
             };
         }
 

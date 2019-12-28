@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="LogConfigurationManager_FileNotFound" xml:space="preserve">
+    <value>Could not locate config file - reinstall</value>
+  </data>
   <data name="MainViewModel_ConnectionStatus_Plural" xml:space="preserve">
     <value>connections found</value>
   </data>
@@ -209,6 +212,9 @@
   </data>
   <data name="MainWindow_Settings_EnableLookup_ToggleText" xml:space="preserve">
     <value>Enable/Disable</value>
+  </data>
+  <data name="MainWindow_Settings_LogLevels" xml:space="preserve">
+    <value>Log Level</value>
   </data>
   <data name="MainWindow_Settings_LookupURL" xml:space="preserve">
     <value>IP Lookup Service URL</value>

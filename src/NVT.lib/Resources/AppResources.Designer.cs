@@ -61,6 +61,15 @@ namespace NVT.lib.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not locate config file - reinstall.
+        /// </summary>
+        public static string LogConfigurationManager_FileNotFound {
+            get {
+                return ResourceManager.GetString("LogConfigurationManager_FileNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to connections found.
         /// </summary>
         public static string MainViewModel_ConnectionStatus_Plural {
@@ -273,6 +282,15 @@ namespace NVT.lib.Resources {
         public static string MainWindow_Settings_EnableLookup_ToggleText {
             get {
                 return ResourceManager.GetString("MainWindow_Settings_EnableLookup_ToggleText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Log Level.
+        /// </summary>
+        public static string MainWindow_Settings_LogLevels {
+            get {
+                return ResourceManager.GetString("MainWindow_Settings_LogLevels", resourceCulture);
             }
         }
         

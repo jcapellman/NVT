@@ -6,6 +6,6 @@
 
         public const string LOG_FILENAME = "nvt_log.txt";
 
-        public static readonly string[] LOG_LEVELS = {"debug", "error"};
+        public static readonly string[] LOG_LEVELS = {"Debug", "Error"};
     }
 }

@@ -15,7 +15,8 @@ using NVT.lib.Managers;
 using NVT.lib.Objects;
 
 using NLog;
-using LogManager = NVT.lib.Managers.LogManager;
+
+using LogConfigurationManager = NVT.lib.Managers.LogConfigurationManager;
 
 namespace NVT.ViewModels
 {
@@ -129,7 +130,7 @@ namespace NVT.ViewModels
         {
             var result = settingsManager.WriteFile();
 
-            LogManager.AdjustLogLevel(SettingsObject.LogLevel);
+            LogConfigurationManager.AdjustLogLevel(SettingsObject.LogLevel);
 
             return result ? lib.Resources.AppResources.MainViewModel_Settings_SavedSuccessfully : lib.Resources.AppResources.MainViewModel_Settings_SavedUnsuccessfully;
         }

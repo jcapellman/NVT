@@ -1,4 +1,8 @@
-﻿namespace NVT.lib.JSONObjects
+﻿using System.Text.Json.Serialization;
+
+using NVT.lib.Common;
+
+namespace NVT.lib.JSONObjects
 {
     public class SettingsObject
     {
@@ -9,5 +13,8 @@
         public string IPLookupURL { get; set; }
 
         public string LogLevel { get; set; }
+
+        [JsonIgnore] 
+        public string[] LogLevels => Constants.LOG_LEVELS;
     }
 }

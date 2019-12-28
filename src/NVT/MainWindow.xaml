@@ -78,7 +78,10 @@
 
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
-                    
+
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
@@ -91,7 +94,10 @@
                 <TextBlock Grid.Row="4" Text="{x:Static p:AppResources.MainWindow_Settings_ScannableConnectionTypes}" />
                 <ListBox Grid.Row="5" SelectionMode="Multiple" ItemsSource="{Binding SettingsObject.EnabledConnectionTypes}" Margin="0,0,0,10" />
 
-                <Button Grid.Row="6" Click="btnSave_Click" HorizontalAlignment="Center" Width="100" ToolTip="{x:Static p:AppResources.MainWindow_Settings_SaveButton_Label}">
+                <TextBlock Grid.Row="6" Text="{x:Static p:AppResources.MainWindow_Settings_LogLevels}" />
+                <ComboBox Grid.Row="7" ItemsSource="{Binding SettingsObject.LogLevels}" SelectedItem="{Binding SettingsObject.LogLevel}" Margin="0,0,0,10" />
+
+                <Button Grid.Row="8" Click="btnSave_Click" HorizontalAlignment="Center" Width="100" ToolTip="{x:Static p:AppResources.MainWindow_Settings_SaveButton_Label}">
                     <iconpacks:PackIconMaterial Kind="ContentSave" />
                 </Button>
             </Grid>
