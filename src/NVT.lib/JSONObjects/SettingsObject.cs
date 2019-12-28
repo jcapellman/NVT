@@ -7,5 +7,7 @@
         public bool EnableIPLookup { get; set; }
 
         public string IPLookupURL { get; set; }
+
+        public string LogLevel { get; set; }
     }
 }
