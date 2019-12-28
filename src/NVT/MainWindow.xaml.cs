@@ -153,5 +153,10 @@ namespace NVT
 
             Process.Start(fullPath);
         }
+
+        private void hlWebpage_Click(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri) { UseShellExecute = true });
+        }
     }
 }

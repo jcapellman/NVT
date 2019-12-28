@@ -106,6 +106,15 @@ namespace NVT.lib.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Source code on GitHub.
+        /// </summary>
+        public static string MainWindow_About_SourceLink {
+            get {
+                return ResourceManager.GetString("MainWindow_About_SourceLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to View Log.
         /// </summary>
         public static string MainWindow_About_ViewLogButton {
