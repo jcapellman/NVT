@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
-
+using NLog;
 using NVT.lib.Managers;
 using NVT.lib.Objects;
 using NVT.lib.PlatformAbstractions;
@@ -12,6 +12,8 @@ namespace NVT.lib.Windows.PlatformImplementations
 {
     public class WindowsNetworkConnectionQuery : BaseNetworkConnectionQuery
     {
+        private static readonly Logger Log = LogManager.GetCurrentClassLogger();
+
         public override List<NetworkConnectionItem> GetActiveConnections()
         {
             var activeConnections = new List<NetworkConnectionItem>();
@@ -75,7 +77,7 @@ namespace NVT.lib.Windows.PlatformImplementations
                         }
                         catch (Exception ex)
                         {
-                            // TODO
+                            Log.Error($"Failed to get filename from process due to: {ex}");
                         }
                     }
 
@@ -83,7 +85,7 @@ namespace NVT.lib.Windows.PlatformImplementations
                 }
                 catch (Exception ex)
                 {
-                    //
+                    Log.Error($"Failed to parse line {line} due to: {ex}");
                 }
             }
 
