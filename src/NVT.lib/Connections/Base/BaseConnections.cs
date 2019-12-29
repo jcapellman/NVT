@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -25,6 +27,9 @@ namespace NVT.lib.Connections.Base
 
         public async Task<List<NetworkConnectionItem>> GetConnectionsAsync(List<NetworkConnectionItem> connectionQuery)
         {
+            var unknownConnections = new List<NetworkConnectionItem>();
+            var knownConnections = new List<NetworkConnectionItem>();
+
             for (var x = 0; x < connectionQuery.Count; x++) {
                 try
                 {
@@ -32,10 +37,12 @@ namespace NVT.lib.Connections.Base
 
                     if (!DB.CheckDB(ref item) && DIContainer.GetDIService<SettingsManager>().SettingsObject.EnableIPLookup)
                     {
-                        item = await GetReverseLookupAsync(item);
+                        unknownConnections.Add(item);
                     }
-
-                    connectionQuery[x] = item;
+                    else
+                    {
+                        knownConnections.Add(item);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -43,47 +50,63 @@ namespace NVT.lib.Connections.Base
                 }
             }
 
-            return connectionQuery;
-        }
+            var lookupResults = await GetReverseLookupAsync(unknownConnections);
 
-        protected static async Task<NetworkConnectionItem> GetReverseLookupAsync(NetworkConnectionItem item)
-        {
-            if (item.IPAddress != Common.Constants.LOCALHOST)
+            foreach (var result in lookupResults)
             {
-                try
+                var item = unknownConnections.FirstOrDefault(a => a.IPAddress == result.query);
+
+                if (item == null)
                 {
-                    var response =
-                        await HttpClient.GetAsync(new Uri($"http://ip-api.com/json/{item.IPAddress}?fields=country,city,lat,lon,isp"));
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        var json = await response.Content.ReadAsStringAsync();
-
-                        if (string.IsNullOrEmpty(json) || json == "{}")
-                        {
-                            return item;
-                        }
-
-                        var ipObject = JsonSerializer.Deserialize<IPAPIJsonObject>(json);
-
-                        item.Latitude = ipObject.lat;
-                        item.Longitude = ipObject.lon;
-                        item.Country = ipObject.country;
-                        item.ISP = ipObject.isp;
-                        item.City = ipObject.city;
-
-                        DB.AddToDB(item);
-
-                        return item;
-                    }
+                    continue;
                 }
-                catch (Exception ex)
-                {
-                    Log.Error($"Error when retrieving the reverse lookup: {ex}");
-                }
+
+                item.City = result.city;
+                item.Country = result.country;
+                item.ISP = result.isp;
+                item.Longitude = result.lon;
+                item.Latitude = result.lat;
+                item.Id = 0;
+
+                DB.AddToDB(item);
+
+                knownConnections.Add(item);
             }
 
-            return item;
+            return knownConnections;
+        }
+
+        protected static async Task<List<IPAPIJsonObject>> GetReverseLookupAsync(List<NetworkConnectionItem> items)
+        {
+            try
+            {
+                var response =
+                    await HttpClient.PostAsync(
+                        new Uri(
+                            DIContainer.GetDIService<SettingsManager>().SettingsObject.IPLookupURL),
+                        new StringContent(
+                            JsonSerializer.Serialize(items.Select(a => a.IPAddress).ToArray()), Encoding.UTF8, "application/json"));
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var json = await response.Content.ReadAsStringAsync();
+
+                    if (string.IsNullOrEmpty(json) || json == "{}")
+                    {
+                        return new List<IPAPIJsonObject>();
+                    }
+
+                    return JsonSerializer.Deserialize<List<IPAPIJsonObject>>(json);
+                }
+
+                return new List<IPAPIJsonObject>();
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"Error when retrieving the reverse lookup: {ex}");
+
+                return new List<IPAPIJsonObject>();
+            }
         }
     }
 }

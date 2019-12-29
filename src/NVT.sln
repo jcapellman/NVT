@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NVT.UnitTests", "NVT.UnitTe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NVT.lib.Windows", "NVT.lib.Windows\NVT.lib.Windows.csproj", "{68F43170-61EC-4516-BA4C-D0A14A90D982}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NVT.REST", "NVT.REST\NVT.REST.csproj", "{AA51EFBF-D875-4CF8-B45F-212598E0594C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,14 @@ Global
 		{68F43170-61EC-4516-BA4C-D0A14A90D982}.Release|Any CPU.Build.0 = Release|Any CPU
 		{68F43170-61EC-4516-BA4C-D0A14A90D982}.Release|x64.ActiveCfg = Release|Any CPU
 		{68F43170-61EC-4516-BA4C-D0A14A90D982}.Release|x64.Build.0 = Release|Any CPU
+		{AA51EFBF-D875-4CF8-B45F-212598E0594C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA51EFBF-D875-4CF8-B45F-212598E0594C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA51EFBF-D875-4CF8-B45F-212598E0594C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{AA51EFBF-D875-4CF8-B45F-212598E0594C}.Debug|x64.Build.0 = Debug|Any CPU
+		{AA51EFBF-D875-4CF8-B45F-212598E0594C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA51EFBF-D875-4CF8-B45F-212598E0594C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA51EFBF-D875-4CF8-B45F-212598E0594C}.Release|x64.ActiveCfg = Release|Any CPU
+		{AA51EFBF-D875-4CF8-B45F-212598E0594C}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

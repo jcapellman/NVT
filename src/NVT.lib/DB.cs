@@ -1,7 +1,8 @@
 ﻿using System;
-
+using System.Collections.Generic;
+using System.Linq;
 using LiteDB;
-
+using NVT.lib.JSONObjects;
 using NVT.lib.Objects;
 
 namespace NVT.lib
@@ -37,6 +38,26 @@ namespace NVT.lib
                 item.Longitude = existingItem.Longitude;
 
                 return true;
+            }
+        }
+
+        public static List<IPAPIJsonObject> CheckDBForIPs(string[] ipAddresses)
+        {
+            using (var db = new LiteDatabase(DB_FILENAME))
+            {
+                var items = db.GetCollection<IPAPIJsonObject>();
+
+                return items.Find(a => ipAddresses.Contains(a.query)).ToList();
+            }
+        }
+
+        public static void AddToDB(List<IPAPIJsonObject> items)
+        {
+            using (var db = new LiteDatabase(DB_FILENAME))
+            {
+                var dbItems = db.GetCollection<IPAPIJsonObject>();
+
+                dbItems.InsertBulk(items);
             }
         }
 

@@ -57,7 +57,7 @@ namespace NVT.lib.Managers
             {
                 EnabledConnectionTypes = DIContainer.GetDIService<ConnectionManager>().SupportedConnectionTypes,
                 EnableIPLookup = true,
-                IPLookupURL = string.Empty,
+                IPLookupURL = "http://localhost:5000/Lookup/",
                 LogLevel = Constants.LOG_LEVELS.Last()
             };
         }

@@ -50,15 +50,15 @@ namespace NVT.lib.Windows.PlatformImplementations
 
                     var len = parts.Length;
 
-                    if (len <= 2 || EMPTY_HOST.Contains(parts[2]) || parts[2].Contains(lib.Common.Constants.LOCALHOST) || parts[1].Count(a => a == ':') > 1)
+                    if (len <= 2 || EMPTY_HOST.Contains(parts[2]) || parts[2].Contains(lib.Common.Constants.LOCALHOST) || parts[1].Count(a => a == ':') > 1 || parts[2] == "*:*")
                     {
                         continue;
                     }
 
                     var networkItem = new NetworkConnectionItem
                     {
-                        IPAddress = parts[1].Split(':')[0],
-                        Port = Convert.ToInt32(parts[1].Split(':')[1]),
+                        IPAddress = parts[2].Split(':')[0],
+                        Port = Convert.ToInt32(parts[2].Split(':')[1]),
                         ProcessId = int.Parse(parts[len - 1]),
                         ConnectionType =  parts[0]
                     };
