@@ -55,7 +55,7 @@ namespace NVT.lib.Managers
         {
             return new SettingsObject
             {
-                EnabledConnectionTypes = new ConnectionManager().SupportedConnectionTypes,
+                EnabledConnectionTypes = DIContainer.GetDIService<ConnectionManager>().SupportedConnectionTypes,
                 EnableIPLookup = true,
                 IPLookupURL = string.Empty,
                 LogLevel = Constants.LOG_LEVELS.Last()

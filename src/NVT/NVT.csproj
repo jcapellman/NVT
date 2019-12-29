@@ -28,6 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\NVT.lib.Windows\NVT.lib.Windows.csproj" />
     <ProjectReference Include="..\NVT.lib\NVT.lib.csproj" />
   </ItemGroup>
 

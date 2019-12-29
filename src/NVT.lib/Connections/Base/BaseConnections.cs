@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 using NVT.lib.JSONObjects;
+using NVT.lib.Managers;
 using NVT.lib.Objects;
 
 using NLog;
@@ -23,123 +21,21 @@ namespace NVT.lib.Connections.Base
             Timeout = TimeSpan.FromSeconds(1)
         };
 
-        public const string UNKNOWN = "<UNKNOWN>";
-
-        protected string[] EMPTY_HOST = { "0.0.0.0:0", "[::]:0" };
-
-        protected const string LOCALHOST = "127.0.0.1";
-
         public abstract string ConnectionType { get; }
 
-        public async Task<List<NetworkConnectionItem>> GetConnectionsAsync(SettingsObject settings)
+        public async Task<List<NetworkConnectionItem>> GetConnectionsAsync(List<NetworkConnectionItem> connectionQuery)
         {
-            var processes = Process.GetProcesses();
-
-            var activeConnections = new List<NetworkConnectionItem>();
-
-            var pStartInfo = new ProcessStartInfo();
-
-            pStartInfo.FileName = "netstat.exe";
-            pStartInfo.Arguments = "-a -n -o";
-            pStartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            pStartInfo.UseShellExecute = false;
-            pStartInfo.RedirectStandardInput = true;
-            pStartInfo.RedirectStandardOutput = true;
-            pStartInfo.RedirectStandardError = true;
-            pStartInfo.CreateNoWindow = true;
-
-            var process = new Process()
-            {
-                StartInfo = pStartInfo
-            };
-
-            process.Start();
-
-            var soStream = process.StandardOutput;
-
-            var output = soStream.ReadToEnd();
-
-            var lines = Regex.Split(output, "\r\n");
-
-            foreach (var line in lines)
-            {
-                string[] parts = null;
-
+            for (var x = 0; x < connectionQuery.Count; x++) {
                 try
                 {
-                    if (!line.Trim().StartsWith(ConnectionType))
+                    var item = connectionQuery[x];
+
+                    if (!DB.CheckDB(ref item) && DIContainer.GetDIService<SettingsManager>().SettingsObject.EnableIPLookup)
                     {
-                        continue;
+                        item = await GetReverseLookupAsync(item);
                     }
 
-                    parts = line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-
-                    var len = parts.Length;
-
-                    if (len <= 2 || EMPTY_HOST.Contains(parts[2]) || parts[2].Contains(LOCALHOST))
-                    {
-                        continue;
-                    }
-
-                    var ipAddress = parts[2].Split(':')[0];
-                    var port = Convert.ToInt32(parts[2].Split(':')[1]);
-
-                    var pid = int.Parse(parts[len - 1]);
-
-                    var processName = UNKNOWN;
-                    var processFileName = UNKNOWN;
-                    var processId = 0;
-
-                    var matchedProcess = processes.FirstOrDefault(a => a.Id == pid);
-
-                    if (matchedProcess != null)
-                    {
-                        processName = matchedProcess.ProcessName;
-
-                        processId = matchedProcess.Id;
-
-                        try
-                        {
-                            processFileName = matchedProcess.MainModule?.FileName;
-                        }
-                        catch
-                        {
-                        }
-                    }
-
-                    var item = DB.CheckDB(ipAddress);
-
-                    if (item == null)
-                    {
-                        item = new NetworkConnectionItem
-                        {
-                            IPAddress = ipAddress,
-                            Port = port,
-                            DetectedTime = DateTime.Now,
-                            ProcessName = processName,
-                            ProcessFileName = processFileName,
-                            ISP = UNKNOWN,
-                            Country = UNKNOWN,
-                            City = UNKNOWN,
-                            ConnectionType = ConnectionType,
-                            ProcessId = processId
-                        };
-
-                        if (settings.EnableIPLookup)
-                        {
-                            item = await GetReverseLookupAsync(item);
-                        }
-                    }
-                    else
-                    {
-                        item.DetectedTime = DateTime.Now;
-                        item.ProcessName = processName;
-                        item.ProcessFileName = processFileName;
-                        item.ConnectionType = ConnectionType;
-                        item.ProcessId = processId;
-                    }
-
-                    activeConnections.Add(item);
+                    connectionQuery[x] = item;
                 }
                 catch (Exception ex)
                 {
@@ -147,12 +43,12 @@ namespace NVT.lib.Connections.Base
                 }
             }
 
-            return activeConnections;
+            return connectionQuery;
         }
 
         protected static async Task<NetworkConnectionItem> GetReverseLookupAsync(NetworkConnectionItem item)
         {
-            if (item.IPAddress != LOCALHOST)
+            if (item.IPAddress != Common.Constants.LOCALHOST)
             {
                 try
                 {
@@ -163,11 +59,8 @@ namespace NVT.lib.Connections.Base
                     {
                         var json = await response.Content.ReadAsStringAsync();
 
-                        if (string.IsNullOrEmpty(json))
+                        if (string.IsNullOrEmpty(json) || json == "{}")
                         {
-                            item.ISP = UNKNOWN;
-                            item.Country = UNKNOWN;
-
                             return item;
                         }
 

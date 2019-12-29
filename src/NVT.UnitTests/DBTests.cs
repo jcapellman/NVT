@@ -11,20 +11,13 @@ namespace NVT.UnitTests
     public class DBTests
     {
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void GetNullIPAddress()
-        {
-            DB.CheckDB(null);
-
-            throw new AssertFailedException();
-        }
-
-        [TestMethod]
         public void GetNotFoundIPAddress()
         {
-            var result = DB.CheckDB("127.256.0.1");
+            var item = new NetworkConnectionItem {IPAddress = "127.256.0.1"};
 
-            Assert.IsNull(result);
+            var result = DB.CheckDB(ref item);
+
+            Assert.IsFalse(result);
         }
 
         [TestMethod]
@@ -46,9 +39,9 @@ namespace NVT.UnitTests
 
             DB.AddToDB(item);
 
-            var result = DB.CheckDB(item.IPAddress);
+            var result = DB.CheckDB(ref item);
 
-            Assert.IsNotNull(result);
+            Assert.IsTrue(result);
         }
     }
 }

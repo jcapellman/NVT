@@ -10,18 +10,33 @@ namespace NVT.lib
     {
         private const string DB_FILENAME = "ips.db";
 
-        public static NetworkConnectionItem CheckDB(string ipAddress)
+        public static bool CheckDB(ref NetworkConnectionItem item)
         {
-            if (string.IsNullOrEmpty(ipAddress))
+            if (item == null)
             {
-                throw new ArgumentNullException(nameof(ipAddress));
+                throw new ArgumentNullException(nameof(item));
             }
 
             using (var db = new LiteDatabase(DB_FILENAME))
             {
                 var items = db.GetCollection<NetworkConnectionItem>();
 
-                return items.FindOne(a => a.IPAddress == ipAddress);
+                var ipAddress = item.IPAddress;
+
+                var existingItem = items.FindOne(a => a.IPAddress == ipAddress);
+
+                if (existingItem == null)
+                {
+                    return false;
+                }
+
+                item.City = existingItem.City;
+                item.Country = existingItem.Country;
+                item.ISP = existingItem.ISP;
+                item.Latitude = existingItem.Latitude;
+                item.Longitude = existingItem.Longitude;
+
+                return true;
             }
         }
 

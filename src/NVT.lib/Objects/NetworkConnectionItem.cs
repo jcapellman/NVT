@@ -29,5 +29,15 @@ namespace NVT.lib.Objects
         public int ProcessId { get; set; }
 
         public string ProcessFileName { get; set; }
+
+        public NetworkConnectionItem()
+        {
+            Country = Common.Constants.UNKNOWN;
+            City = Common.Constants.UNKNOWN;
+            ISP = Common.Constants.UNKNOWN;
+            DetectedTime = DateTime.Now;
+            ProcessFileName = Common.Constants.UNKNOWN;
+            ProcessName = Common.Constants.UNKNOWN;
+        }
     }
 }

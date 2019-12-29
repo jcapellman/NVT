@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using NVT.lib.Connections.Base;
 using NVT.lib.Objects;
-using NVT.lib.JSONObjects;
+using NVT.lib.PlatformAbstractions;
 
 namespace NVT.lib.Managers
 {
@@ -14,8 +14,12 @@ namespace NVT.lib.Managers
     {
         private readonly List<BaseConnections> _connections = new List<BaseConnections>();
 
-        public ConnectionManager()
+        private readonly BaseNetworkConnectionQuery _networkConnectionQuery;
+
+        public ConnectionManager(BaseNetworkConnectionQuery networkConnectionQuery)
         {
+            _networkConnectionQuery = networkConnectionQuery;
+
             var implementations = Assembly.GetAssembly(typeof(BaseConnections)).GetTypes().Where(a => a.BaseType == typeof(BaseConnections)).ToList();
 
             foreach (var implementation in implementations)
@@ -26,13 +30,15 @@ namespace NVT.lib.Managers
 
         public string[] SupportedConnectionTypes => _connections.Select(a => a.ConnectionType).ToArray();
 
-        public async Task<List<NetworkConnectionItem>> GetConnectionsAsync(SettingsObject settings)
+        public async Task<List<NetworkConnectionItem>> GetConnectionsAsync()
         {
             var networkConnections = new List<NetworkConnectionItem>();
 
-            foreach (var connection in _connections.Where(a => settings.EnabledConnectionTypes.Contains(a.ConnectionType)))
+            var activeConnections = _networkConnectionQuery.GetActiveConnections();
+
+            foreach (var connection in _connections.Where(a => DIContainer.GetDIService<SettingsManager>().SettingsObject.EnabledConnectionTypes.Contains(a.ConnectionType)))
             {
-                var connections = await connection.GetConnectionsAsync(settings);
+                var connections = await connection.GetConnectionsAsync(activeConnections.Where(a => a.ConnectionType == connection.ConnectionType).ToList());
 
                 networkConnections.AddRange(connections);
             }

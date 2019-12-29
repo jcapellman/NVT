@@ -7,5 +7,9 @@
         public const string LOG_FILENAME = "nvt_log.txt";
 
         public static readonly string[] LOG_LEVELS = {"Debug", "Error"};
+
+        public const string UNKNOWN = "<UNKNOWN>";
+
+        public const string LOCALHOST = "127.0.0.1";
     }
 }

@@ -15,7 +15,7 @@ using NVT.lib.Managers;
 using NVT.lib.Objects;
 
 using NLog;
-
+using NVT.lib;
 using LogConfigurationManager = NVT.lib.Managers.LogConfigurationManager;
 
 namespace NVT.ViewModels
@@ -128,7 +128,7 @@ namespace NVT.ViewModels
 
         public string SaveSettings()
         {
-            var result = settingsManager.WriteFile();
+            var result = DIContainer.GetDIService<SettingsManager>().WriteFile();
 
             LogConfigurationManager.AdjustLogLevel(SettingsObject.LogLevel);
 
@@ -159,17 +159,13 @@ namespace NVT.ViewModels
             }
         }
 
-        private readonly ConnectionManager connectionManager = new ConnectionManager();
-
-        private readonly SettingsManager settingsManager = new SettingsManager();
-
         public SettingsObject SettingsObject
         {
-            get => settingsManager.SettingsObject;
+            get => DIContainer.GetDIService<SettingsManager>().SettingsObject;
 
             set
             {
-                settingsManager.SettingsObject = value;
+                DIContainer.GetDIService<SettingsManager>().SettingsObject = value;
 
                 OnPropertyChanged();
             }
@@ -199,7 +195,7 @@ namespace NVT.ViewModels
 
         private async void _bwConnections_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            var newConnections = await connectionManager.GetConnectionsAsync(settingsManager.SettingsObject);
+            var newConnections = await DIContainer.GetDIService<ConnectionManager>().GetConnectionsAsync();
 
             Log.Debug($"Received {newConnections.Count} connections");
 
