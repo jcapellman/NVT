@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -75,9 +76,11 @@ namespace NVT.lib.Windows.PlatformImplementations
                         {
                             networkItem.ProcessFileName = processItem.FileName;
                         }
-                        catch (Exception ex)
+                        catch (Win32Exception wex)
                         {
-                            Log.Error($"Failed to get filename from process due to: {ex}");
+                            Log.Error($"Failed to get filename from process due to: {wex}");
+
+                            networkItem.ProcessFileName = $"{networkItem.ProcessName} (Name)";
                         }
                     }
 
