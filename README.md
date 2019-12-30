@@ -2,7 +2,7 @@
 
 ![alt text](image.png)
 
-NVAT stands for N)etwork V)isualization T)ool.  It is a WPF .NET Core 3.1 application showing TCP Connections and the processes tied to them to provide end-users more insight into what applications have connections throughout our connected world.
+NVT stands for N)etwork V)isualization T)ool.  It is a WPF .NET Core 3.1 application showing TCP Connections and the processes tied to them to provide end-users more insight into what applications have connections throughout our connected world.
 
 ### Features in the upcoming 0.1 Release:
 * Ability to kill the process from the GUI
