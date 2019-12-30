@@ -119,11 +119,14 @@ namespace NVT
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            var response = ViewModel.SaveSettings();
+            var (message, success) = ViewModel.SaveSettings();
 
-            MessageBox.Show(response);
+            MessageBox.Show(message);
 
-            btnSettings_Click(null, null);
+            if (success)
+            {
+                btnSettings_Click(null, null);
+            }
         }
 
         private void btnStopProcess_Click(object sender, RoutedEventArgs e)

@@ -219,6 +219,9 @@
   <data name="MainWindow_Settings_LookupURL" xml:space="preserve">
     <value>IP Lookup Service URL</value>
   </data>
+  <data name="MainWindow_Settings_NoURLEntered" xml:space="preserve">
+    <value>No Lookup URL entered - please enter a valid URL if lookup is enabled</value>
+  </data>
   <data name="MainWindow_Settings_SaveButton_Label" xml:space="preserve">
     <value>Save</value>
   </data>

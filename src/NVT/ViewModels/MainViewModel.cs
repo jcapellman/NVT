@@ -126,13 +126,18 @@ namespace NVT.ViewModels
         public List<Location> Locations =>
             Connections.Where(a => a.Latitude.HasValue && a.Longitude.HasValue).Select(a => new Location(a.Latitude.Value, a.Longitude.Value)).ToList();
 
-        public string SaveSettings()
+        public (string Message, bool Success) SaveSettings()
         {
+            if (SettingsObject.EnableIPLookup && string.IsNullOrEmpty(SettingsObject.IPLookupURL))
+            {
+                return (lib.Resources.AppResources.MainWindow_Settings_NoURLEntered, false);
+            }
+
             var result = DIContainer.GetDIService<SettingsManager>().WriteFile();
 
             LogConfigurationManager.AdjustLogLevel(SettingsObject.LogLevel);
 
-            return result ? lib.Resources.AppResources.MainViewModel_Settings_SavedSuccessfully : lib.Resources.AppResources.MainViewModel_Settings_SavedUnsuccessfully;
+            return result ? (lib.Resources.AppResources.MainViewModel_Settings_SavedSuccessfully, true) : (lib.Resources.AppResources.MainViewModel_Settings_SavedUnsuccessfully, false);
         }
 
         private BackgroundWorker _bwConnections;

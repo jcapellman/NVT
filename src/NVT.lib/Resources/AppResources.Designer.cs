@@ -304,6 +304,15 @@ namespace NVT.lib.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No Lookup URL entered - please enter a valid URL if lookup is enabled.
+        /// </summary>
+        public static string MainWindow_Settings_NoURLEntered {
+            get {
+                return ResourceManager.GetString("MainWindow_Settings_NoURLEntered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         public static string MainWindow_Settings_SaveButton_Label {
