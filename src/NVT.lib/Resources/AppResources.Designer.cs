@@ -259,7 +259,7 @@ namespace NVT.lib.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No current TCP Connections found.
+        ///   Looks up a localized string similar to No current Network Connections found.
         /// </summary>
         public static string MainWindow_NoConnectionsFound {
             get {

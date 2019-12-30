@@ -202,7 +202,7 @@
     <value>Could not find log file to open</value>
   </data>
   <data name="MainWindow_NoConnectionsFound" xml:space="preserve">
-    <value>No current TCP Connections found</value>
+    <value>No current Network Connections found</value>
   </data>
   <data name="MainWindow_SettingsHeader" xml:space="preserve">
     <value>Settings</value>
