@@ -19,12 +19,7 @@ namespace NVT.REST.Controllers
                 var response =
                     await httpClient.GetAsync("https://api.github.com/repos/jcapellman/NVT/releases/latest");
 
-                if (response.IsSuccessStatusCode)
-                {
-                    return JsonSerializer.Deserialize<GitHubLatestResponseItem>(await response.Content.ReadAsStringAsync());
-                }
-
-                return null;
+                return response.IsSuccessStatusCode ? JsonSerializer.Deserialize<GitHubLatestResponseItem>(await response.Content.ReadAsStringAsync()) : null;
             }
         }
 
