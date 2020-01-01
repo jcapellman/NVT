@@ -9,8 +9,9 @@ body {
 }
 
 a {
-    color: #fdcc52;
+    color: gold;
     transition: all .35s;
+    font-weight: bold;
 }
 
 a:hover, a:focus {
@@ -43,6 +44,7 @@ p {
     font-size: 18px;
     line-height: 1.5;
     margin-bottom: 20px;
+    color: white;
 }
 
 section {
@@ -292,7 +294,7 @@ section.features .feature-item i {
     font-size: 80px;
     display: block;
     margin-bottom: 15px;
-    background: linear-gradient(to left, #7b4397, #dc2430);
+    background: linear-gradient(to left, #7b4397, gold);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
