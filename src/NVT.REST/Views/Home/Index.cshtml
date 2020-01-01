@@ -56,9 +56,9 @@
             <div class="row">
                 <div class="col-md-8 mx-auto">
                     <h2 class="section-heading">Discover what network connections you have</h2>
-                    <p>Current Version: <strong>@Model.name - Released @Model.published_at</strong></p>
+                    <p>Current Version: <strong>@Model.name - Released @Model.published_at.ToShortDateString()</strong></p>
                     <div class="badges">
-                        <a class="badge-link" href="@Model.assets_url"><img src="img/github-badge.png" alt=""></a>
+                        <a class="badge-link" href="@Model.assets.FirstOrDefault()?.browser_download_url"><img src="img/github-badge.png" alt=""></a>
                     </div>
                 </div>
             </div>
