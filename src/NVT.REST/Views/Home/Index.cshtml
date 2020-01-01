@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model NVT.REST.Objects.GitHubLatestResponseItem
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -52,9 +54,9 @@
             <div class="row">
                 <div class="col-md-8 mx-auto">
                     <h2 class="section-heading">Discover what network connections you have</h2>
-                    <p>Current Version: <strong>0.0.1 (alpha) - Released January 1, 2020</strong></p>
+                    <p>Current Version: <strong>@Model.name - Released @Model.published_at</strong></p>
                     <div class="badges">
-                        <a class="badge-link" href="https://github.com/jcapellman/NVT/releases/download/0.0.1/nvt-0.0.1.zip"><img src="img/github-badge.png" alt=""></a>
+                        <a class="badge-link" href="@Model.assets_url"><img src="img/github-badge.png" alt=""></a>
                     </div>
                 </div>
             </div>
