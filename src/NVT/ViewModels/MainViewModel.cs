@@ -117,7 +117,7 @@ namespace NVT.ViewModels
                     MainGridVisibility = Visibility.Collapsed;
                 }
 
-                MapVisibility = Locations.Any() ? Visibility.Visible : Visibility.Collapsed;
+                MapVisibility = SettingsObject.EnableMap && Locations.Any() ? Visibility.Visible : Visibility.Collapsed;
 
                 ExportBtnEnabled = Connections.Any();
             }
@@ -180,6 +180,7 @@ namespace NVT.ViewModels
         {
             MainGridVisibility = Visibility.Collapsed;
             EmptyGridVisibility = Visibility.Visible;
+            MapVisibility = SettingsObject.EnableMap ? Visibility.Visible : Visibility.Collapsed;
 
             ExportBtnEnabled = false;
 

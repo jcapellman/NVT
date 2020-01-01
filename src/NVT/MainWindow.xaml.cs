@@ -15,6 +15,7 @@ using NVT.lib.Objects;
 
 using NLog;
 using NVT.Extensions;
+using NVT.lib;
 
 namespace NVT
 {
@@ -35,6 +36,11 @@ namespace NVT
 
         private void ViewModel_OnNewConnections(object sender, System.EventArgs e)
         {
+            if (!ViewModel.SettingsObject.EnableMap)
+            {
+                return;
+            }
+
             bmMap.Children.Clear();
 
             if (!ViewModel.Locations.Any())

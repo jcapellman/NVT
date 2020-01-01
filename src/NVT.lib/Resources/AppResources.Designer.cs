@@ -286,6 +286,24 @@ namespace NVT.lib.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enable Map Visualization.
+        /// </summary>
+        public static string MainWindow_Settings_EnableMap {
+            get {
+                return ResourceManager.GetString("MainWindow_Settings_EnableMap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable/Disable.
+        /// </summary>
+        public static string MainWindow_Settings_EnableMap_ToggleText {
+            get {
+                return ResourceManager.GetString("MainWindow_Settings_EnableMap_ToggleText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Log Level.
         /// </summary>
         public static string MainWindow_Settings_LogLevels {

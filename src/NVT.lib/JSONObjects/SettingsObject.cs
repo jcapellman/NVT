@@ -14,6 +14,8 @@ namespace NVT.lib.JSONObjects
 
         public string LogLevel { get; set; }
 
+        public bool EnableMap { get; set; }
+
         [JsonIgnore] 
         public string[] LogLevels => Constants.LOG_LEVELS;
     }

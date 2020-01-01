@@ -213,6 +213,12 @@
   <data name="MainWindow_Settings_EnableLookup_ToggleText" xml:space="preserve">
     <value>Enable/Disable</value>
   </data>
+  <data name="MainWindow_Settings_EnableMap" xml:space="preserve">
+    <value>Enable Map Visualization</value>
+  </data>
+  <data name="MainWindow_Settings_EnableMap_ToggleText" xml:space="preserve">
+    <value>Enable/Disable</value>
+  </data>
   <data name="MainWindow_Settings_LogLevels" xml:space="preserve">
     <value>Log Level</value>
   </data>
