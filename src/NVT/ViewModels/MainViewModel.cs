@@ -130,7 +130,9 @@ namespace NVT.ViewModels
         {
             if (SettingsObject.EnableIPLookup && string.IsNullOrEmpty(SettingsObject.IPLookupURL))
             {
-                return (lib.Resources.AppResources.MainWindow_Settings_NoURLEntered, false);
+                SettingsObject.IPLookupURL = lib.Common.Constants.FALLBACK_LOOKUPURL;
+
+                SettingsObject = SettingsObject;
             }
 
             var result = DIContainer.GetDIService<SettingsManager>().WriteFile();

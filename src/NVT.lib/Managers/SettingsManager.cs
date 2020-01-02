@@ -57,10 +57,20 @@ namespace NVT.lib.Managers
             {
                 EnabledConnectionTypes = DIContainer.GetDIService<ConnectionManager>().SupportedConnectionTypes,
                 EnableIPLookup = true,
-                IPLookupURL = "http://www.networkviztool.io/Lookup/",
+                IPLookupURL = Constants.FALLBACK_LOOKUPURL,
                 EnableMap = true,
                 LogLevel = Constants.LOG_LEVELS.Last()
             };
+        }
+
+        private static SettingsObject SanityCheck(SettingsObject settings)
+        {
+            if (settings.EnableIPLookup && string.IsNullOrEmpty(settings.IPLookupURL))
+            {
+                settings.IPLookupURL = Common.Constants.FALLBACK_LOOKUPURL;
+            }
+
+            return settings;
         }
 
         private SettingsObject LoadFile(string fileName)
@@ -69,7 +79,9 @@ namespace NVT.lib.Managers
             {
                 var json = File.ReadAllText(fileName);
 
-                return JsonSerializer.Deserialize<SettingsObject>(json);
+                var result = JsonSerializer.Deserialize<SettingsObject>(json);
+
+                return SanityCheck(result);
             } catch (Exception ex)
             {
                 Log.Error($"Error loading settings from {fileName}, exception: {ex}");

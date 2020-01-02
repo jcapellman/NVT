@@ -11,5 +11,7 @@
         public const string UNKNOWN = "<UNKNOWN>";
 
         public const string LOCALHOST = "127.0.0.1";
+
+        public const string FALLBACK_LOOKUPURL = "http://www.networkviztool.io/Lookup/";
     }
 }
