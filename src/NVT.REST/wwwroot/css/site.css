@@ -210,7 +210,7 @@ header.masthead .device-container .screen img {
 section.download {
     position: relative;
     padding: 150px 0;
-    background-color: #dc2430 !important;
+    background: url("../img/bg-pattern.png"), #dc2430;
 }
 
 section.download h2 {
