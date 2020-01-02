@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
+using System.Threading;
 using System.Windows;
 
 using Microsoft.Maps.MapControl.WPF;
@@ -142,8 +145,6 @@ namespace NVT.ViewModels
             return result ? (lib.Resources.AppResources.MainViewModel_Settings_SavedSuccessfully, true) : (lib.Resources.AppResources.MainViewModel_Settings_SavedUnsuccessfully, false);
         }
 
-        private BackgroundWorker _bwConnections;
-
         public string ExportConnections(string fileName)
         {
             if (Connections == null || !Connections.Any())
@@ -187,47 +188,49 @@ namespace NVT.ViewModels
             ExportBtnEnabled = false;
 
             Connections = new ObservableCollection<NetworkConnectionItem>();
-            
-            _bwConnections = new BackgroundWorker();
 
-            _bwConnections.DoWork += _bwConnections_DoWork;
-            _bwConnections.RunWorkerCompleted += _bwConnections_RunWorkerCompleted;
+            var backgroundWorker = new BackgroundWorker
+            {
+                WorkerReportsProgress = true,
+                WorkerSupportsCancellation = false
+            };
 
-            _bwConnections.RunWorkerAsync();
+            backgroundWorker.DoWork += BackgroundWorkerOnDoWork;
+            backgroundWorker.ProgressChanged += BackgroundWorkerOnProgressChanged;
+
+            backgroundWorker.RunWorkerAsync();
         }
 
-        private void _bwConnections_DoWork(object sender, DoWorkEventArgs e)
+        private void BackgroundWorkerOnProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            System.Threading.Thread.Sleep(3000);
-        }
+            var newConnections = (List<NetworkConnectionItem>) e.UserState;
 
-        private async void _bwConnections_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            var newConnections = await DIContainer.GetDIService<ConnectionManager>().GetConnectionsAsync();
-
-            Log.Debug($"Received {newConnections.Count} connections");
-
-            for (var x = 0; x < Connections.Count; x++)
+            Application.Current.Dispatcher?.Invoke(delegate
             {
-                if (!newConnections.Any(a => a.IPAddress == Connections[x].IPAddress && a.Port == Connections[x].Port))
-                {
-                    Connections.RemoveAt(x);
-                }
-            }
-
-            foreach (var connection in newConnections.Where(connection =>
-                !Connections.Any(a => a.IPAddress == connection.IPAddress && a.Port == connection.Port)))
-            {
-                Connections.Insert(0, connection);
-            }
+                Connections = new ObservableCollection<NetworkConnectionItem>(newConnections.OrderByDescending(a => a.DetectedTime));
+            });
 
             OnNewConnections?.Invoke(null, null);
 
-            CurrentStatus = Connections.Count == 1 ? 
-                $"{Connections.Count} {NVT.lib.Resources.AppResources.MainViewModel_ConnectionStatus_Singular}" : 
+            CurrentStatus = Connections.Count == 1 ?
+                $"{Connections.Count} {NVT.lib.Resources.AppResources.MainViewModel_ConnectionStatus_Singular}" :
                 $"{Connections.Count} {NVT.lib.Resources.AppResources.MainViewModel_ConnectionStatus_Plural}";
+        }
 
-            _bwConnections.RunWorkerAsync();
+        private void BackgroundWorkerOnDoWork(object sender, DoWorkEventArgs e)
+        {
+            var worker = (BackgroundWorker)sender;
+
+            while (true)
+            {
+                var newConnections = DIContainer.GetDIService<ConnectionManager>().GetConnectionsAsync().Result;
+
+                Log.Debug($"Received {newConnections.Count} connections");
+
+                worker.ReportProgress(0, newConnections);
+
+                Thread.Sleep(10000);
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
