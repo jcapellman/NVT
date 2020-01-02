@@ -428,5 +428,23 @@ namespace NVT.lib.Resources {
                 return ResourceManager.GetString("ProcessManager_KillProcess_Success", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exit.
+        /// </summary>
+        public static string TrayIcon_ContextMenu_Exit {
+            get {
+                return ResourceManager.GetString("TrayIcon_ContextMenu_Exit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show Window.
+        /// </summary>
+        public static string TrayIcon_ContextMenu_OpenWindow {
+            get {
+                return ResourceManager.GetString("TrayIcon_ContextMenu_OpenWindow", resourceCulture);
+            }
+        }
     }
 }

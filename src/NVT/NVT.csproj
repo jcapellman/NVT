@@ -9,13 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="app.ico" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="app.ico">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
+    <Resource Include="app.ico" />
   </ItemGroup>
 
   <ItemGroup>

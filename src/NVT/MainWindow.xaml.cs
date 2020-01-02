@@ -10,12 +10,11 @@ using MahApps.Metro.Controls;
 using Microsoft.Maps.MapControl.WPF;
 using Microsoft.Win32;
 
+using NVT.Extensions;
 using NVT.ViewModels;
 using NVT.lib.Objects;
 
 using NLog;
-using NVT.Extensions;
-using NVT.lib;
 
 namespace NVT
 {
@@ -29,9 +28,19 @@ namespace NVT
         {
             InitializeComponent();
 
+            
+            Closing += MainWindow_Closing;
+
             DataContext = new MainViewModel();
 
             ViewModel.OnNewConnections += ViewModel_OnNewConnections;
+        }
+
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+
+            Hide();
         }
 
         private void ViewModel_OnNewConnections(object sender, System.EventArgs e)
@@ -166,6 +175,19 @@ namespace NVT
         private void hlWebpage_Click(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
         {
             Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri) { UseShellExecute = true });
+        }
+
+        private void mnuItem_ShowWindow(object sender, RoutedEventArgs e)
+        {
+            if (Visibility != Visibility.Visible)
+            {
+                Visibility = Visibility.Visible;
+            }
+        }
+
+        private void mnuItem_Exit(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }

@@ -9,12 +9,14 @@
         xmlns:iconpacks="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.Material"
         mc:Ignorable="d"
         xmlns:p="clr-namespace:NVT.lib.Resources;assembly=NVT.lib"
+        xmlns:tb="http://www.hardcodet.net/taskbar"
         ShowIconOnTitleBar="True"
         GlowBrush="Black"
         WindowStartupLocation="CenterScreen"
         ShowMinButton="True"
         Icon="/NVT;component/app.ico"
         ShowMaxRestoreButton="True"
+        IsMinButtonEnabled="False"
         WindowButtonCommandsOverlayBehavior="Always"
         Title="NVT" ResizeMode="CanResize" MinHeight="720" MinWidth="1280">
     <Window.DataContext>
@@ -42,7 +44,16 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <mah:Flyout x:Name="foAbout" Header="{x:Static p:AppResources.MainWindow_AboutHeader}" Position="Right" Width="250">
+        <tb:TaskbarIcon x:Name="tbMain" IconSource="app.ico" Visibility="Visible" ToolTipText="NVT">
+            <tb:TaskbarIcon.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Click="mnuItem_ShowWindow" Header="{x:Static p:AppResources.TrayIcon_ContextMenu_OpenWindow}"/>
+                    <MenuItem Click="mnuItem_Exit" Header="{x:Static p:AppResources.TrayIcon_ContextMenu_Exit}" />
+                </ContextMenu>
+            </tb:TaskbarIcon.ContextMenu>
+        </tb:TaskbarIcon>
+
+            <mah:Flyout x:Name="foAbout" Header="{x:Static p:AppResources.MainWindow_AboutHeader}" Position="Right" Width="250">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />

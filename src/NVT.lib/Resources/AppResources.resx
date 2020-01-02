@@ -240,4 +240,10 @@
   <data name="ProcessManager_KillProcess_Success" xml:space="preserve">
     <value>Successfully killed process</value>
   </data>
+  <data name="TrayIcon_ContextMenu_Exit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="TrayIcon_ContextMenu_OpenWindow" xml:space="preserve">
+    <value>Show Window</value>
+  </data>
 </root>
