@@ -57,6 +57,11 @@ namespace NVT.lib
             {
                 var dbItems = db.GetCollection<IPAPIJsonObject>();
 
+                foreach (var item in items)
+                {
+                    item.Id = default;
+                }
+
                 dbItems.InsertBulk(items);
             }
         }
