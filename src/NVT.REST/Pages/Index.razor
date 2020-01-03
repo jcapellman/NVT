@@ -1,0 +1,102 @@
+﻿@page "/"
+
+@using NVT.REST.Data
+@using NVT.REST.Objects
+
+@inject GitHubService GhService
+
+<header class="masthead">
+    <div class="container h-100">
+        <div class="row h-100">
+            <div class="col-lg-7 my-auto">
+                <div class="header-content mx-auto">
+                    <h1 class="mb-5">In the connected world we live in - do you know what network connections are on your machine right now?</h1>
+                    <a href="#download" class="btn btn-outline btn-xl" onclick="event.stopPropagation();">Download now to find out</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+@if (latestRelease != null)
+{
+    <section class="download bg-primary text-center" id="download">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 mx-auto">
+                    <h2 class="section-heading">Discover what network connections you have</h2>
+                    <p>Current Version: <strong>@latestRelease.name - Released @latestRelease.published_at.ToShortDateString()</strong></p>
+                    <div class="badges">
+                        <a class="badge-link" href="@latestRelease.assets.FirstOrDefault()?.browser_download_url"><img src="img/github-badge.png" alt=""></a>
+                    </div>
+                    <p>Requires <a href="https://dotnet.microsoft.com/download/dotnet-core/thank-you/runtime-desktop-3.1.0-windows-x86-installer" target="_blank">.NET Core 3.1 Runtime</a></p>
+                    <p>Supported Operating Systems:<br/> Windows 7 SP1/8.1/10 (1607+) and Server 2012 R2+ (Linux and macOS coming soon)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+<section class="features" id="features">
+    <div class="container">
+        <div class="section-heading text-center">
+            <h2>Highlevel Features</h2>
+            <p><a href="https://github.com/jcapellman/NVT/wiki/Roadmap">Current Roadmap</a> of new features - add your own <a href="https://github.com/jcapellman/NVT/issues">suggestions or issues</a></p>
+            <hr>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 my-auto">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="feature-item">
+                                <i class="fas fa-feather"></i>
+                                <h3>Lightweight Application</h3>
+                                <p>Written using the latest and greatest .NET Core 3.1 framework</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="feature-item">
+                                <i class="fas fa-search"></i>
+                                <h3>Supports TCP and UDP</h3>
+                                <p>Scans both connection types and in a future version, packet inspection</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="feature-item">
+                                <i class="fas fa-user-secret"></i>
+                                <h3>Privacy First</h3>
+                                <p>Only the IP Address being connected is sent to the main server to perform the reverse lookups - no other data is sent.  Alternatively, this feature can be turned off or you can run your own local server</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="feature-item">
+                                <i class="fas fa-lock-open"></i>
+                                <h3>Always Open Source</h3>
+                                <p>No restriction MIT License</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>  
+    </div>
+</section>
+<footer>
+    <div class="container">
+        <p>
+            &copy;2019-@DateTime.Now.Year Jarred Capellman.<br />
+            source code on <a href="http://github.com/jcapellman/nvt" target="_blank">GitHub</a>
+        </p>
+    </div>
+</footer>
+@code {
+    private GitHubLatestResponseItem latestRelease;
+
+    protected override async Task OnInitializedAsync()
+    {
+        latestRelease = await GhService.GetLatestRelease();
+    }
+}

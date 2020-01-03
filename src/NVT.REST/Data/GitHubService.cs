@@ -1,33 +1,24 @@
-﻿using System.Net.Http;
+using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-using Microsoft.AspNetCore.Mvc;
-
 using NVT.REST.Objects;
 
-namespace NVT.REST.Controllers
+namespace NVT.REST.Data
 {
-    public class HomeController : Controller
+    public class GitHubService
     {
-        private async Task<GitHubLatestResponseItem> GetLatestRelease()
+        public async Task<GitHubLatestResponseItem> GetLatestRelease()
         {
             using (var httpClient = new HttpClient())
             {
                 httpClient.DefaultRequestHeaders.Add("User-Agent", "NVTWebApp");
-                
+
                 var response =
                     await httpClient.GetAsync("https://api.github.com/repos/jcapellman/NVT/releases/latest");
 
                 return response.IsSuccessStatusCode ? JsonSerializer.Deserialize<GitHubLatestResponseItem>(await response.Content.ReadAsStringAsync()) : null;
             }
-        }
-
-        public async Task<IActionResult> Index()
-        {
-            var gitHubResponseItem = await GetLatestRelease();
-
-            return View(gitHubResponseItem);
         }
     }
 }
