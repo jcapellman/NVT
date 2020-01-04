@@ -1,8 +1,7 @@
-﻿using LiteDB;
+﻿using MongoDB.Bson.Serialization.Attributes;
 
 namespace NVT.lib.JSONObjects
-{
-    public class IPAPIJsonObject
+{ public class IPAPIJsonObject
     {
         [BsonId]
         public string _id { get; set; }
@@ -34,5 +33,10 @@ namespace NVT.lib.JSONObjects
         public string _as { get; set; }
         
         public string query { get; set; }
+
+        public IPAPIJsonObject()
+        {
+            _id = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
+        }
     }
 }
