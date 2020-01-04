@@ -1,8 +1,11 @@
-﻿namespace NVT.lib.JSONObjects
+﻿using LiteDB;
+
+namespace NVT.lib.JSONObjects
 {
     public class IPAPIJsonObject
     {
-        public int Id { get; set; }
+        [BsonId]
+        public string _id { get; set; }
 
         public string status { get; set; }
 
