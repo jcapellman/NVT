@@ -60,7 +60,7 @@ namespace NVT.REST.DAL
             {
                 var collection = _db.GetCollection<IPAPIJsonObject>(CollectionName);
 
-                var filter = Builders<IPAPIJsonObject>.Filter.AnyIn(nameof(IPAPIJsonObject.query), ipAddresses);
+                var filter = Builders<IPAPIJsonObject>.Filter.Where(a => ipAddresses.Contains(a.query));
 
                 return collection.FindSync(filter).ToList();
             }
