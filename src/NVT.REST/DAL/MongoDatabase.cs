@@ -35,7 +35,7 @@ namespace NVT.REST.DAL
             }
         }
 
-        public async void AddToDB(List<IPAPIJsonObject> items)
+        public void AddToDB(List<IPAPIJsonObject> items)
         {
             try
             {
@@ -45,8 +45,8 @@ namespace NVT.REST.DAL
                 }
 
                 var collection = _db.GetCollection<IPAPIJsonObject>(CollectionName);
-
-                await collection.InsertMany(items);
+                
+                collection.InsertMany(items);
             }
             catch (Exception ex)
             {
