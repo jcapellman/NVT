@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Linq;
 using MongoDB.Driver;
 
 using NLog;
@@ -19,16 +19,11 @@ namespace NVT.REST.DAL
 
         private const string CollectionName = "ips";
 
-        public MongoDatabase(string hostname = "localhost", int portNumber = 27017)
+        public MongoDatabase()
         {
             try
             {
-                var mongoSettings = new MongoClientSettings()
-                {
-                    Server = new MongoServerAddress(hostname, portNumber)
-                };
-
-                var client = new MongoClient(mongoSettings);
+                var client = new MongoClient();
 
                 _db = client.GetDatabase(CollectionName);
             }
@@ -44,9 +39,14 @@ namespace NVT.REST.DAL
         {
             try
             {
+                if (!items.Any())
+                {
+                    return;
+                }
+
                 var collection = _db.GetCollection<IPAPIJsonObject>(CollectionName);
 
-                await collection.InsertManyAsync(items);
+                await collection.InsertMany(items);
             }
             catch (Exception ex)
             {
