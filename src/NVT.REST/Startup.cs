@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.HttpOverrides;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
+using NVT.REST.DAL;
 using NVT.REST.Data;
 
 namespace NVT.REST
@@ -24,6 +24,7 @@ namespace NVT.REST
             services.AddControllers();
             services.AddServerSideBlazor();
             services.AddSingleton<GitHubService>();
+            services.AddSingleton<MongoDatabase>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

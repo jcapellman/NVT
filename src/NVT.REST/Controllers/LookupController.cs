@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using NVT.lib;
 using NVT.lib.JSONObjects;
-
+using NVT.REST.DAL;
 using NVT.REST.Objects;
 
 namespace NVT.REST.Controllers
@@ -18,8 +18,6 @@ namespace NVT.REST.Controllers
     [Route("[controller]")]
     public class LookupController : ControllerBase
     {
-        private List<IPAPIJsonObject> CheckDB(string[] ipAddresses) => DB.CheckDBForIPs(ipAddresses);
-
         private async Task<List<IPAPIJsonObject>> CheckAPI(string[] ipAddresses)
         {
             using (var httpClient = new HttpClient())
@@ -43,16 +41,23 @@ namespace NVT.REST.Controllers
             }
         }
 
+        private MongoDatabase _database;
+
+        public LookupController(MongoDatabase database)
+        {
+            _database = database;
+        }
+
         [HttpPost]
         public IEnumerable<IPAPIJsonObject> POST(string[] ipAddresses)
         {
-            var dbMatches = CheckDB(ipAddresses);
+            var dbMatches = _database.CheckDBForIPs(ipAddresses);
 
             var unknownMatches = ipAddresses.Where(ipAddress => dbMatches.All(a => a.query != ipAddress)).ToArray();
 
             var apiHits = CheckAPI(unknownMatches).Result;
 
-            DB.AddToDB(apiHits);
+            _database.AddToDB(apiHits);
 
             dbMatches.AddRange(apiHits);
 

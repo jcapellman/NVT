@@ -24,7 +24,7 @@ namespace NVT.UnitTests
         [ExpectedException(typeof(ArgumentNullException))]
         public void AddNullToDB()
         {
-            DB.AddToDB(items: null);
+            DB.AddToDB(null);
 
             throw new AssertFailedException();
         }

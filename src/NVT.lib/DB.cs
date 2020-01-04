@@ -41,31 +41,6 @@ namespace NVT.lib
             }
         }
 
-        public static List<IPAPIJsonObject> CheckDBForIPs(string[] ipAddresses)
-        {
-            using (var db = new LiteDatabase(DB_FILENAME))
-            {
-                var items = db.GetCollection<IPAPIJsonObject>();
-
-                return items.Find(a => ipAddresses.Contains(a.query)).ToList();
-            }
-        }
-
-        public static void AddToDB(List<IPAPIJsonObject> items)
-        {
-            using (var db = new LiteDatabase(DB_FILENAME))
-            {
-                var dbItems = db.GetCollection<IPAPIJsonObject>();
-
-                foreach (var item in items)
-                {
-                    item.Id = default;
-                }
-
-                dbItems.InsertBulk(items);
-            }
-        }
-
         public static void AddToDB(NetworkConnectionItem item)
         {
             if (item == null)
