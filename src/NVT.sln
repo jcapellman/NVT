@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NVT.lib", "NVT.lib\NVT.lib.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NVT.UnitTests", "NVT.UnitTests\NVT.UnitTests.csproj", "{63AF19FB-06A6-4621-B71C-5D8132CBC4C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NVT.lib.Windows", "NVT.lib.Windows\NVT.lib.Windows.csproj", "{68F43170-61EC-4516-BA4C-D0A14A90D982}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NVT.lib.Windows", "NVT.lib.Windows\NVT.lib.Windows.csproj", "{68F43170-61EC-4516-BA4C-D0A14A90D982}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NVT.REST", "NVT.REST\NVT.REST.csproj", "{AA51EFBF-D875-4CF8-B45F-212598E0594C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NVT.REST", "NVT.REST\NVT.REST.csproj", "{AA51EFBF-D875-4CF8-B45F-212598E0594C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

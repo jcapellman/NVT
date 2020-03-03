@@ -14,7 +14,11 @@
 
   <ItemGroup>
     <PackageReference Include="Hardcodet.NotifyIcon.Wpf.NetCore" Version="1.0.10" />
+<<<<<<< .mine
     <PackageReference Include="LiteDB" Version="5.0.3" />
+=======
+    <PackageReference Include="LiteDB" Version="5.0.2" />
+>>>>>>> .theirs
     <PackageReference Include="MahApps.Metro" Version="1.6.5" />
     <PackageReference Include="MahApps.Metro.IconPacks" Version="3.2.0" />
     <PackageReference Include="Microsoft.Maps.MapControl.WPF" Version="1.0.0.3" />
