@@ -30,7 +30,7 @@
             </Button>
 
             <Button VerticalAlignment="Center" Click="btnSettings_Click" ToolTip="{x:Static p:AppResources.MainWindowCommand_Tooltips_Settings}">
-                <iconpacks:PackIconMaterial VerticalAlignment="Center" Kind="Settings" />
+                <iconpacks:PackIconMaterial VerticalAlignment="Center" Kind="SettingsHelper" />
             </Button>
 
             <Button Click="btnAbout_Click" ToolTip="{x:Static p:AppResources.MainWindowCommand_Tooltips_About}">
@@ -100,7 +100,7 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock Grid.Row="0" Text="{x:Static p:AppResources.MainWindow_Settings_EnableLookup}" />
-                <mah:ToggleSwitch Grid.Row="1" Content="{x:Static p:AppResources.MainWindow_Settings_EnableLookup_ToggleText}" Margin="0,0,0,10" IsChecked="{Binding SettingsObject.EnableIPLookup, Mode=TwoWay}" />
+                <mah:ToggleSwitch Grid.Row="1" Content="{x:Static p:AppResources.MainWindow_Settings_EnableLookup_ToggleText}" Margin="0,0,0,10" IsOn="{Binding SettingsObject.EnableIPLookup, Mode=TwoWay}" />
 
                 <TextBlock Grid.Row="2" Text="{x:Static p:AppResources.MainWindow_Settings_LookupURL}" IsEnabled="{Binding SettingsObject.EnableIPLookup}" />
                 <TextBox Grid.Row="3" Text="{Binding SettingsObject.IPLookupURL, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding SettingsObject.EnableIPLookup}" Margin="0,0,0,10" />
@@ -112,7 +112,7 @@
                 <ComboBox Grid.Row="7" ItemsSource="{Binding SettingsObject.LogLevels}" SelectedItem="{Binding SettingsObject.LogLevel}" Margin="0,0,0,10" />
 
                 <TextBlock Grid.Row="8" Text="{x:Static p:AppResources.MainWindow_Settings_EnableMap}" />
-                <mah:ToggleSwitch Grid.Row="9" Content="{x:Static p:AppResources.MainWindow_Settings_EnableMap_ToggleText}" Margin="0,0,0,10" IsChecked="{Binding SettingsObject.EnableMap, Mode=TwoWay}" />
+                <mah:ToggleSwitch Grid.Row="9" Content="{x:Static p:AppResources.MainWindow_Settings_EnableMap_ToggleText}" Margin="0,0,0,10" IsOn="{Binding SettingsObject.EnableMap, Mode=TwoWay}" />
 
                 <Button Grid.Row="10" Click="btnSave_Click" HorizontalAlignment="Center" Width="100" ToolTip="{x:Static p:AppResources.MainWindow_Settings_SaveButton_Label}">
                     <iconpacks:PackIconMaterial Kind="ContentSave" />
