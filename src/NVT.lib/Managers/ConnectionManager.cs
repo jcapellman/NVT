@@ -12,7 +12,7 @@ namespace NVT.lib.Managers
 {
     public class ConnectionManager
     {
-        private readonly List<BaseConnections> _connections = new List<BaseConnections>();
+        private readonly List<BaseConnections> _connections = new();
 
         private readonly BaseNetworkConnectionQuery _networkConnectionQuery;
 
@@ -20,11 +20,16 @@ namespace NVT.lib.Managers
         {
             _networkConnectionQuery = networkConnectionQuery;
 
-            var implementations = Assembly.GetAssembly(typeof(BaseConnections)).GetTypes().Where(a => a.BaseType == typeof(BaseConnections)).ToList();
+            var implementations = Assembly.GetAssembly(typeof(BaseConnections))?.GetTypes().Where(a => a.BaseType == typeof(BaseConnections)).ToList();
 
+            if (implementations == null)
+            {
+                return;
+            }
+            
             foreach (var implementation in implementations)
             {
-                _connections.Add((BaseConnections)Activator.CreateInstance(implementation));
+                _connections.Add((BaseConnections) Activator.CreateInstance(implementation));
             }
         }
 

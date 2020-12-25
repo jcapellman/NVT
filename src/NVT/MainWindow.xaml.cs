@@ -61,6 +61,11 @@ namespace NVT
             
             foreach (var item in ViewModel.Connections.Where(a => a.Latitude.HasValue && a.Longitude.HasValue))
             {
+                if (!item.Latitude.HasValue || !item.Longitude.HasValue)
+                {
+                    continue;
+                }
+                
                 bmMap.Children.Add(new Pushpin
                 {
                     Location = new Location(item.Latitude.Value, item.Longitude.Value),
