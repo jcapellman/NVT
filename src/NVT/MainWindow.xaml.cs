@@ -174,7 +174,16 @@ namespace NVT
                 return;
             }
 
-            Process.Start(fullPath);
+            var process = new Process
+            {
+                StartInfo = new ProcessStartInfo()
+                {
+                    UseShellExecute = true, 
+                    FileName = fullPath
+                }
+            };
+
+            process.Start();
         }
 
         private void hlWebpage_Click(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
