@@ -132,12 +132,23 @@
 
         <Grid Grid.Row="0" Visibility="{Binding MainGridVisibility, Mode=TwoWay}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
+                <RowDefinition>
+                    <RowDefinition.Style>
+                        <Style>
+                            <Setter Property="RowDefinition.Height" Value="*"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding MapVisibility}" Value="Collapsed">
+                                    <Setter Property="RowDefinition.Height" Value="0"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </RowDefinition.Style>
+                </RowDefinition>
+                <RowDefinition Height="2*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <wpf:Map Grid.Row="0" Grid.Column="0" Visibility="{Binding MapVisibility}" x:Name="bmMap" CredentialsProvider="AofM3Qx9ySMc6cYJ5iSz0UI_gs1vgdzRgWSmGqIvYvf3W36A2cJQvrAK99AMhOYM" ZoomLevel="12" />
+            <wpf:Map Grid.Row="0" Grid.Column="0" x:Name="bmMap" CredentialsProvider="AofM3Qx9ySMc6cYJ5iSz0UI_gs1vgdzRgWSmGqIvYvf3W36A2cJQvrAK99AMhOYM" ZoomLevel="12" />
 
             <ListView Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Connections}">
                 <ListView.View>
