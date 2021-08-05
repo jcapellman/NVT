@@ -30,18 +30,19 @@ namespace NVT.lib.Connections.Base
             var unknownConnections = new List<NetworkConnectionItem>();
             var knownConnections = new List<NetworkConnectionItem>();
 
-            for (var x = 0; x < connectionQuery.Count; x++) {
+            foreach (var connection in connectionQuery)
+            {
                 try
                 {
-                    var item = connectionQuery[x];
-
-                    if (!DB.CheckDB(ref item) && DIContainer.GetDIService<SettingsManager>().SettingsObject.EnableIPLookup)
+                    var networkConnectionItem = connection;
+                    
+                    if (!DB.CheckDB(ref networkConnectionItem) && DIContainer.GetDIService<SettingsManager>().SettingsObject.EnableIPLookup)
                     {
-                        unknownConnections.Add(item);
+                        unknownConnections.Add(networkConnectionItem);
                     }
                     else
                     {
-                        knownConnections.Add(item);
+                        knownConnections.Add(networkConnectionItem);
                     }
                 }
                 catch (Exception ex)
@@ -72,6 +73,8 @@ namespace NVT.lib.Connections.Base
 
                 knownConnections.Add(item);
             }
+
+            knownConnections.AddRange(unknownConnections);
 
             return knownConnections;
         }
