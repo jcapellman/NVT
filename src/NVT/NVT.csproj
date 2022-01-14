@@ -18,7 +18,7 @@
     <PackageReference Include="MahApps.Metro" Version="2.4.9" />
     <PackageReference Include="MahApps.Metro.IconPacks" Version="4.11.0" />
     <PackageReference Include="Microsoft.Maps.MapControl.WPF" Version="1.0.0.3" />
-    <PackageReference Include="NLog" Version="5.0.0-preview.3" />
+    <PackageReference Include="NLog" Version="5.0.0-rc1" />
     <PackageReference Include="System.Management" Version="6.0.0" />
   </ItemGroup>
 
