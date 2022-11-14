@@ -2,7 +2,7 @@
 
 ![alt text](image.png)
 
-NVT stands for N)etwork V)isualization T)ool.  It is a WPF .NET 6.0 application showing TCP Connections and the processes tied to them to provide end-users more insight into what applications have connections throughout our connected world.
+NVT stands for N)etwork V)isualization T)ool.  It is a WPF .NET 7.0 application showing TCP Connections and the processes tied to them to provide end-users more insight into what applications have connections throughout our connected world.
 
 ### Current Features:
 * Ability to kill the process from the GUI
