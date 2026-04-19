@@ -23,7 +23,7 @@ namespace NVT.UnitTests
         [TestMethod]
         public void AddNullToDB()
         {
-            Assert.ThrowsExactly<ArgumentNullException>(() => DB.AddToDB(null));
+            Assert.ThrowsExactly<ArgumentNullException>(() => DB.AddToDB(null!));
         }
 
         [TestMethod]

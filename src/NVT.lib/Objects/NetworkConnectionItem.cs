@@ -6,17 +6,17 @@ namespace NVT.lib.Objects
     {
         public int Id { get; set; }
 
-        public string ConnectionType { get; set; }
+        public string ConnectionType { get; set; } = string.Empty;
 
-        public string IPAddress { get; set; }
+        public string IPAddress { get; set; } = string.Empty;
 
         public int Port { get; set; }
 
-        public string Country { get; set; }
+        public string? Country { get; set; }
 
-        public string City { get; set; }
+        public string? City { get; set; }
 
-        public string ISP { get; set; }
+        public string? ISP { get; set; }
 
         public double? Latitude { get; set; }
 
@@ -24,11 +24,11 @@ namespace NVT.lib.Objects
 
         public DateTime DetectedTime { get; set; }
 
-        public string ProcessName { get; set; }
+        public string? ProcessName { get; set; }
 
         public int ProcessId { get; set; }
 
-        public string ProcessFileName { get; set; }
+        public string? ProcessFileName { get; set; }
 
         public NetworkConnectionItem()
         {

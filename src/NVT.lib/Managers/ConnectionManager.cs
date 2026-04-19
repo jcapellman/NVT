@@ -29,7 +29,11 @@ namespace NVT.lib.Managers
             
             foreach (var implementation in implementations)
             {
-                _connections.Add((BaseConnections) Activator.CreateInstance(implementation));
+                var instance = Activator.CreateInstance(implementation) as BaseConnections;
+                if (instance != null)
+                {
+                    _connections.Add(instance);
+                }
             }
         }
 
@@ -41,7 +45,7 @@ namespace NVT.lib.Managers
 
             var activeConnections = _networkConnectionQuery.GetActiveConnections();
 
-            foreach (var connection in _connections.Where(a => DIContainer.GetDIService<SettingsManager>().SettingsObject.EnabledConnectionTypes.Contains(a.ConnectionType)))
+            foreach (var connection in _connections.Where(a => DIContainer.GetDIService<SettingsManager>()!.SettingsObject.EnabledConnectionTypes.Contains(a.ConnectionType)))
             {
                 var connections = await connection.GetConnectionsAsync(activeConnections.Where(a => a.ConnectionType == connection.ConnectionType).ToList());
 

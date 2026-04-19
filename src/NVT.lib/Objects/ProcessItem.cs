@@ -6,7 +6,7 @@ namespace NVT.lib.Objects
     {
         public string Name => _process.ProcessName;
 
-        public string FileName => _process.MainModule.FileName;
+        public string? FileName => _process.MainModule?.FileName;
 
         public int ID => _process.Id;
 

@@ -34,7 +34,7 @@ namespace NVT.REST.Controllers
 
                     var results = JsonSerializer.Deserialize<List<IPAPIJsonObject>>(json);
 
-                    return results.Where(a => a.status != "fail").ToList();
+                    return results?.Where(a => a.status != "fail").ToList() ?? new List<IPAPIJsonObject>();
                 }
 
                 return new List<IPAPIJsonObject>();

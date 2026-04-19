@@ -8,7 +8,7 @@ namespace NVT.REST.Data
 {
     public class GitHubService
     {
-        public async Task<GitHubLatestResponseItem> GetLatestRelease()
+        public async Task<GitHubLatestResponseItem?> GetLatestRelease()
         {
             using (var httpClient = new HttpClient())
             {

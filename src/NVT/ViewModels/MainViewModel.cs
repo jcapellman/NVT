@@ -83,9 +83,9 @@ namespace NVT.ViewModels
             }
         }
 
-        public event EventHandler OnNewConnections;
+        public event EventHandler? OnNewConnections;
 
-        private ObservableCollection<NetworkConnectionItem> _connections;
+        private ObservableCollection<NetworkConnectionItem> _connections = [];
 
         public ObservableCollection<NetworkConnectionItem> Connections
         {
@@ -99,7 +99,7 @@ namespace NVT.ViewModels
             }
         }
 
-        private string _currentStatus;
+        private string _currentStatus = string.Empty;
 
         public string CurrentStatus
         {
@@ -127,7 +127,7 @@ namespace NVT.ViewModels
         }
 
         public List<Location> Locations =>
-            Connections.Where(a => a.Latitude.HasValue && a.Longitude.HasValue).Select(a => new Location(a.Latitude.Value, a.Longitude.Value)).ToList();
+            Connections.Where(a => a.Latitude.HasValue && a.Longitude.HasValue).Select(a => new Location(a.Latitude!.Value, a.Longitude!.Value)).ToList();
 
         public (string Message, bool Success) SaveSettings()
         {
@@ -138,7 +138,7 @@ namespace NVT.ViewModels
                 SettingsObject = SettingsObject;
             }
 
-            var result = DIContainer.GetDIService<SettingsManager>().WriteFile();
+            var result = DIContainer.GetDIService<SettingsManager>()!.WriteFile();
 
             LogConfigurationManager.AdjustLogLevel(SettingsObject.LogLevel);
 
@@ -169,11 +169,11 @@ namespace NVT.ViewModels
 
         public SettingsObject SettingsObject
         {
-            get => DIContainer.GetDIService<SettingsManager>().SettingsObject;
+            get => DIContainer.GetDIService<SettingsManager>()!.SettingsObject;
 
             set
             {
-                DIContainer.GetDIService<SettingsManager>().SettingsObject = value;
+                DIContainer.GetDIService<SettingsManager>()!.SettingsObject = value;
 
                 OnPropertyChanged();
             }
@@ -201,29 +201,30 @@ namespace NVT.ViewModels
             backgroundWorker.RunWorkerAsync();
         }
 
-        private void BackgroundWorkerOnProgressChanged(object sender, ProgressChangedEventArgs e)
+        private void BackgroundWorkerOnProgressChanged(object? sender, ProgressChangedEventArgs e)
         {
-            var newConnections = (List<NetworkConnectionItem>) e.UserState;
+            var newConnections = e.UserState as List<NetworkConnectionItem>;
 
             Application.Current.Dispatcher?.Invoke(delegate
             {
-                Connections = new ObservableCollection<NetworkConnectionItem>(newConnections.OrderByDescending(a => a.DetectedTime));
+                Connections = new ObservableCollection<NetworkConnectionItem>(newConnections?.OrderByDescending(a => a.DetectedTime) ?? Enumerable.Empty<NetworkConnectionItem>());
             });
 
-            OnNewConnections?.Invoke(null, null);
+            OnNewConnections?.Invoke(this, EventArgs.Empty);
 
             CurrentStatus = Connections.Count == 1 ?
                 $"{Connections.Count} {NVT.lib.Resources.AppResources.MainViewModel_ConnectionStatus_Singular}" :
                 $"{Connections.Count} {NVT.lib.Resources.AppResources.MainViewModel_ConnectionStatus_Plural}";
         }
 
-        private void BackgroundWorkerOnDoWork(object sender, DoWorkEventArgs e)
+        private void BackgroundWorkerOnDoWork(object? sender, DoWorkEventArgs e)
         {
-            var worker = (BackgroundWorker)sender;
+            var worker = sender as BackgroundWorker;
+            if (worker == null) return;
 
             while (true)
             {
-                var newConnections = DIContainer.GetDIService<ConnectionManager>().GetConnectionsAsync().Result;
+                var newConnections = DIContainer.GetDIService<ConnectionManager>()!.GetConnectionsAsync().Result;
 
                 Log.Debug($"Received {newConnections.Count} connections");
 
@@ -233,9 +234,9 @@ namespace NVT.ViewModels
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

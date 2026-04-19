@@ -27,7 +27,7 @@
                     <h2 class="section-heading">Discover what network connections you have</h2>
                     <p>Current Version: <strong>@latestRelease.name - Released @latestRelease.published_at.ToShortDateString()</strong></p>
                     <div class="badges">
-                        <a class="badge-link" href="@latestRelease.assets.FirstOrDefault()?.browser_download_url"><img src="img/github-badge.png" alt=""></a>
+                        <a class="badge-link" href="@latestRelease?.assets?.FirstOrDefault()?.browser_download_url"><img src="img/github-badge.png" alt=""></a>
                     </div>
                     <p>Requires <a href="https://dotnet.microsoft.com/download/dotnet-core/thank-you/runtime-desktop-3.1.0-windows-x86-installer" target="_blank">.NET Core 3.1 Runtime</a></p>
                     <p>Supported Operating Systems:<br/> Windows 7 SP1/8.1/10 (1607+) and Server 2012 R2+ (Linux and macOS coming soon)</p>
@@ -95,7 +95,7 @@
     </div>
 </footer>
 @code {
-    private GitHubLatestResponseItem latestRelease;
+    private GitHubLatestResponseItem? latestRelease;
 
     protected override async Task OnInitializedAsync()
     {

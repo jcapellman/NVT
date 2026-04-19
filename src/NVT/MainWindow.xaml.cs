@@ -36,14 +36,14 @@ namespace NVT
             ViewModel.OnNewConnections += ViewModel_OnNewConnections;
         }
 
-        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void MainWindow_Closing(object? sender, System.ComponentModel.CancelEventArgs e)
         {
             e.Cancel = true;
 
             Hide();
         }
 
-        private void ViewModel_OnNewConnections(object sender, System.EventArgs e)
+        private void ViewModel_OnNewConnections(object? sender, System.EventArgs e)
         {
             if (!ViewModel.SettingsObject.EnableMap)
             {
@@ -94,7 +94,7 @@ namespace NVT
             }
         }
 
-        private void btnSettings_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void btnSettings_Click(object? sender, System.Windows.RoutedEventArgs e)
         {
             foSettings.IsOpen = !foSettings.IsOpen;
 
@@ -145,7 +145,7 @@ namespace NVT
 
             if (success)
             {
-                btnSettings_Click(null, null);
+                foSettings.IsOpen = !foSettings.IsOpen;
             }
         }
 

@@ -16,18 +16,18 @@ namespace NVT.lib.Managers
 
         private const string SETTINGS_FILENAME = "settings.json";
 
-        public SettingsObject SettingsObject;
+        public SettingsObject SettingsObject = null!;
 
         public SettingsManager()
         {
             if (File.Exists(SETTINGS_FILENAME))
             {
-                SettingsObject = LoadFile(SETTINGS_FILENAME);
-            }
-
-            if (SettingsObject != null)
-            {
-                return;
+                var loaded = LoadFile(SETTINGS_FILENAME);
+                if (loaded != null)
+                {
+                    SettingsObject = loaded;
+                    return;
+                }
             }
 
             SettingsObject = InitializeDefaultSettings();
@@ -55,7 +55,7 @@ namespace NVT.lib.Managers
         {
             return new SettingsObject
             {
-                EnabledConnectionTypes = DIContainer.GetDIService<ConnectionManager>().SupportedConnectionTypes,
+                EnabledConnectionTypes = DIContainer.GetDIService<ConnectionManager>()?.SupportedConnectionTypes ?? [],
                 EnableIPLookup = true,
                 IPLookupURL = Constants.FALLBACK_LOOKUPURL,
                 EnableMap = true,
@@ -73,7 +73,7 @@ namespace NVT.lib.Managers
             return settings;
         }
 
-        private SettingsObject LoadFile(string fileName)
+        private SettingsObject? LoadFile(string fileName)
         {
             try
             {
@@ -81,8 +81,9 @@ namespace NVT.lib.Managers
 
                 var result = JsonSerializer.Deserialize<SettingsObject>(json);
 
-                return SanityCheck(result);
-            } catch (Exception ex)
+                return result != null ? SanityCheck(result) : null;
+            }
+            catch (Exception ex)
             {
                 Log.Error($"Error loading settings from {fileName}, exception: {ex}");
 

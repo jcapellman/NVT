@@ -13,9 +13,9 @@ namespace NVT.lib.Managers
                 return Resources.AppResources.LogConfigurationManager_FileNotFound;
             }
 
-            NLog.LogManager.Configuration.RemoveRuleByName("*");
+            NLog.LogManager.Configuration?.RemoveRuleByName("*");
 
-            NLog.LogManager.Configuration.AddRule(LogLevel.Debug, LogLevel.Error, "logFile", "*");
+            NLog.LogManager.Configuration?.AddRule(LogLevel.Debug, LogLevel.Error, "logFile", "*");
 
             NLog.LogManager.ReconfigExistingLoggers();
 

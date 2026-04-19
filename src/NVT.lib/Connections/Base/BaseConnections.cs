@@ -36,7 +36,7 @@ namespace NVT.lib.Connections.Base
                 {
                     var networkConnectionItem = connection;
                     
-                    if (!DB.CheckDB(ref networkConnectionItem) && DIContainer.GetDIService<SettingsManager>().SettingsObject.EnableIPLookup)
+                    if (!DB.CheckDB(ref networkConnectionItem) && DIContainer.GetDIService<SettingsManager>()!.SettingsObject.EnableIPLookup)
                     {
                         unknownConnections.Add(networkConnectionItem);
                     }
@@ -86,7 +86,7 @@ namespace NVT.lib.Connections.Base
                 var response =
                     await HttpClient.PostAsync(
                         new Uri(
-                            DIContainer.GetDIService<SettingsManager>().SettingsObject.IPLookupURL),
+                            DIContainer.GetDIService<SettingsManager>()!.SettingsObject.IPLookupURL),
                         new StringContent(
                             JsonSerializer.Serialize(items.Select(a => a.IPAddress).ToArray()), Encoding.UTF8, "application/json"));
 
@@ -99,7 +99,7 @@ namespace NVT.lib.Connections.Base
                         return new List<IPAPIJsonObject>();
                     }
 
-                    return JsonSerializer.Deserialize<List<IPAPIJsonObject>>(json);
+                    return JsonSerializer.Deserialize<List<IPAPIJsonObject>>(json) ?? new List<IPAPIJsonObject>();
                 }
 
                 return new List<IPAPIJsonObject>();

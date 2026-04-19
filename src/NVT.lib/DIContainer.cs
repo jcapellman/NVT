@@ -7,9 +7,9 @@ namespace NVT.lib
 {
     public static class DIContainer
     {
-        private static ServiceProvider _container;
+        private static ServiceProvider? _container;
 
-        public static T GetDIService<T>() => _container.GetService<T>();
+        public static T? GetDIService<T>() where T : class => _container?.GetService<T>();
 
         public static void BuildContainer(BaseNetworkConnectionQuery connectionQuery)
         {
