@@ -1,0 +1,16 @@
+<Project>
+
+  <PropertyGroup>
+    <!-- Enable modern .NET features -->
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    
+    <!-- Build optimizations -->
+    <Deterministic>true</Deterministic>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    
+    <!-- Default platform configuration -->
+    <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+</Project>

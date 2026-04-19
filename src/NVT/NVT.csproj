@@ -4,7 +4,6 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net10.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
-    <Platforms>AnyCPU;x64</Platforms>
     <ApplicationIcon>app.ico</ApplicationIcon>
   </PropertyGroup>
 
@@ -13,13 +12,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="H.NotifyIcon.Wpf" Version="2.4.1" />
-    <PackageReference Include="LiteDB" Version="5.0.21" />
-    <PackageReference Include="MahApps.Metro" Version="2.4.11" />
-    <PackageReference Include="MahApps.Metro.IconPacks" Version="6.2.1" />
-    <PackageReference Include="Microsoft.Maps.MapControl.WPF" Version="1.0.0.3" />
-    <PackageReference Include="NLog" Version="6.1.1" />
-    <PackageReference Include="System.Management" Version="10.0.5" />
+    <PackageReference Include="H.NotifyIcon.Wpf" />
+    <PackageReference Include="LiteDB" />
+    <PackageReference Include="MahApps.Metro" />
+    <PackageReference Include="MahApps.Metro.IconPacks" />
+    <PackageReference Include="Microsoft.Maps.MapControl.WPF" />
+    <PackageReference Include="NLog" />
+    <PackageReference Include="System.Management" />
   </ItemGroup>
 
   <ItemGroup>
